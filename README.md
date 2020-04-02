@@ -38,8 +38,9 @@ typedef struct gradebook {
   * Print GradeBook
 
 # contributors
-* <a href="https://github.com/siddharthborderwala">Siddharth Borderwala</a>
-* <a href="https://github.com/niramay447">Niramay Kachhadiya</a>
-* <a href="https://github.com/sgupta2501">Samarth Gupta</a>
-* <a href="https://github.com/Aarjav-D">Aarjav Desai</a>
-* <a href="https://github.com/HelBlazer">Yash Varshney</a>
+[Siddharth Borderwala](https://github.com/siddharthborderwala)
+[Niramay Kachhadiya](https://github.com/niramay447)
+[Aarjav Desai](https://github.com/Aarjav-D)
+[Samarth Gupta](https://github.com/sgupta2501)
+[Yash Varshney](https://github.com/HelBlazer)
+
