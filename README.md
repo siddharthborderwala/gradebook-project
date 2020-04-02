@@ -38,9 +38,9 @@ typedef struct gradebook {
   * Print GradeBook
 
 # contributors
-[Siddharth Borderwala](https://github.com/siddharthborderwala)
-[Niramay Kachhadiya](https://github.com/niramay447)
-[Aarjav Desai](https://github.com/Aarjav-D)
-[Samarth Gupta](https://github.com/sgupta2501)
-[Yash Varshney](https://github.com/HelBlazer)
+[Siddharth Borderwala](https://github.com/siddharthborderwala)  
+[Niramay Kachhadiya](https://github.com/niramay447)  
+[Aarjav Desai](https://github.com/Aarjav-D)  
+[Samarth Gupta](https://github.com/sgupta2501)  
+[Yash Varshney](https://github.com/HelBlazer)  
 
