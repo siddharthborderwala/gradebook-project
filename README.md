@@ -39,7 +39,7 @@ typedef struct gradebook {
 
 # contributors
 * <a href="https://github.com/siddharthborderwala">Siddharth Borderwala</a>
-* <a href="https://github.com/nk447">Niramay Kachhadiya</a>
+* <a href="https://github.com/niramay447">Niramay Kachhadiya</a>
 * <a href="https://github.com/sgupta2501">Samarth Gupta</a>
 * <a href="https://github.com/Aarjav-D">Aarjav Desai</a>
 * <a href="https://github.com/HelBlazer">Yash Varshney</a>
