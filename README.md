@@ -2,6 +2,7 @@
 A gradebook, implementation of Linked List data structure
 
 # docs
+* The following is how the data-structures are defined
 ```c
 ///marksheet is a struct which has marks for 5 subjects
 typedef struct marksheet {
@@ -29,11 +30,16 @@ typedef struct gradebook {
 ```
 
 # features
-<ul>
-  <li>Create Record</li>
-  <li>Delete Record</li>
-  <li>Update Record</li>
-  <li>Read Record</li>
-  <li>Delete GradeBook</li>
-  <li>Print GradeBook</li>
-</ul>
+  * Create Record
+  * Delete Record
+  * Update Record
+  * Read Record
+  * Delete GradeBook
+  * Print GradeBook
+
+# contributors
+<a href="https://github.com/siddharthborderwala">Siddharth Borderwala</a>
+<a href="https://github.com/nk447">Niramay Kachhadiya</a>
+<a href="https://github.com/sgupta2501">Samarth Gupta</a>
+<a href="https://github.com/Aarjav-D">Aarjav Desai</a>
+<a href="https://github.com/HelBlazer">Yash Varshney</a>
