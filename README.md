@@ -2,40 +2,84 @@
 A gradebook, implementation of Linked List data structure
 
 # docs
-* The following is how the data-structures are defined
+### The following is a reference for the defined data-structures  
 ```c
-///marksheet is a struct which has marks for 5 subjects
+/*
+rollNum data type
+*/
+typedef long long int rollNum;
+
+/*
+marksheet is a struct which has marks for 5 subjects
+*/
 typedef struct marksheet {
 	float math;
 	float english;
 	float science;
 	float social_science;
 	float sec_lang;
-} marksheet;
+} Marksheet;
 
-///record is a struct like a node in a linked list
-///it has name, roll number, marks (marksheet) and pointer to next record
+/*
+record is a struct like a node in a linked list
+it has name, roll number, marks (marksheet) and pointer to next record
+*/
 typedef struct record {
 	char name[50];
-	long long int rollNum;
-	marksheet marks;
+	rollNum roll_num;
+	Marksheet marks;
 	struct record * next;
-} record;
+} Record;
 
-///gradebook is a wrapper struct for the head, i.e. pointer to a particular
-///linked list/ gradebook
-typedef struct gradebook {
-	record * head;
-} gradebook;
-```
+/*
+gradebook is a wrapper struct for the head, i.e. pointer to a particular
+linked list/gradebook
+*/
+typedef struct Gradebook {
+	Record * head;
+	Record * tail;
+} Gradebook;
+```  
+
+### The following is a reference for functions of the api  
+```c
+/*
+Initializes a new Gradebook Object
+Takes in nothing
+Returns Gradebook
+*/
+Gradebook createGradeBook();
+
+/*
+Creates a new record in an existing gradebook
+Takes in a Pointer to Gradebook and a Record Object
+Returns the newly created Record
+*/
+Record createNewRecord(Gradebook *, Record);
+
+/*
+Prints if the record is found, if yes then prints record
+Takes in a Pointer to Gradebook and a Name
+Returns void
+*/
+void findRecordByName(Gradebook *, char []);
+
+/*
+Prints if the record is found, if yes then prints record
+Takes in a Pointer to Gradebook and a Roll Number
+Returns void
+*/
+void findRecordByRollNum(Gradebook *, rollNum);
+```  
 
 # features
   * Create Record
   * Delete Record
   * Update Record
   * Read Record
-  * Delete GradeBook
+  * Create Gradebook
   * Print GradeBook
+  * Delete GradeBook
 
 # contributors
 [Siddharth Borderwala](https://github.com/siddharthborderwala)  
