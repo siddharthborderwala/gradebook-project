@@ -236,7 +236,7 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 		while (cur != NULL && cur->roll_num != roll_num)
 			cur = cur->next;
 	}
-	else if (roll_num = 0) // update using the name
+	else if (roll_num == 0) // update using the name
 	{
 		// if length of the search name is greater than 50 characters, it will be truncated
 		if (strlen(name) > 50)
@@ -265,7 +265,29 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 	return (*cur);
 }
 
-// just for testing puroses during development
+void printGradebook(Gradebook *gb_ptr)
+{
+	// if the gradebook is empty
+	if (isGradeBookEmpty(gb_ptr))
+	{
+		printf("\nGradebook is empty :(");
+		return;
+	}
+
+	Record *cur = gb_ptr->head;
+
+	printf("\n------Gradebook------\n");
+
+	while (cur != NULL)
+	{
+		printRecord(cur);
+		cur = cur->next;
+	}
+
+	printf("\n------Task Over------\n");
+}
+
+// just for testing purposes during development
 void main()
 {
 	;
