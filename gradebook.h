@@ -8,7 +8,8 @@ typedef long long int rollNum;
 /*
 marksheet is a struct which has marks for 5 subjects
 */
-typedef struct marksheet {
+typedef struct marksheet
+{
 	float math;
 	float english;
 	float science;
@@ -20,22 +21,23 @@ typedef struct marksheet {
 record is a struct like a node in a linked list
 it has name, roll number, marks (marksheet) and pointer to next record
 */
-typedef struct record {
+typedef struct record
+{
 	char name[50];
 	rollNum roll_num;
 	Marksheet marks;
-	struct record * next;
+	struct record *next;
 } Record;
 
 /*
 gradebook is a wrapper struct for the head, i.e. pointer to a particular
 linked list/gradebook
 */
-typedef struct Gradebook {
-	Record * head;
-	Record * tail;
+typedef struct Gradebook
+{
+	Record *head;
+	Record *tail;
 } Gradebook;
-
 
 // -> -> FUNCTION DEFINITIONS
 
@@ -74,8 +76,7 @@ Returns 1 if strings are equal
 Takes in two strings to compare
 Returns int
 */
-int isStrEq(char [], char[]);
-
+int isStrEq(char[], char[]);
 
 // -> core functions
 
@@ -98,7 +99,7 @@ Prints if the record is found, if yes then prints record
 Takes in a Pointer to Gradebook and a Name
 Returns void
 */
-void findRecordByName(Gradebook *, char []);
+void findRecordByName(Gradebook *, char[]);
 
 /*
 Prints if the record is found, if yes then prints record
@@ -106,3 +107,24 @@ Takes in a Pointer to Gradebook and a Roll Number
 Returns void
 */
 void findRecordByRollNum(Gradebook *, rollNum);
+
+/*
+Updates the name in a record
+Takes in a Pointer to Gradebook, a new Name and a search Roll Number
+Returns the updated Record/if record not found function terminates
+*/
+Record updateNameInRecord(char[], rollNum, Gradebook *);
+
+/*
+Updates the roll number in a record
+Takes in a Pointer to Gradebook, a search Name and a new Roll Number
+Returns the updated Record/if record not found function terminates
+*/
+Record updateRollNumInRecord(char[], rollNum, Gradebook *);
+
+/*
+Updates the marksheet in a record
+Takes in a Pointer to Gradebook, either a search Name or a search Roll Number and The new Marksheet
+Returns the updated Record/if record not found function terminates
+*/
+Record updateMarksheetInRecord(char[], rollNum, Marksheet, Gradebook *);
