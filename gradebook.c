@@ -51,7 +51,7 @@ int isStrEq(char a[], char b[])
 	for (size_t i = 0; i <= len_a; i++)
 		if (a[i] != b[i])
 			return 0;
-	return 1;	
+	return 1;
 }
 
 // -> CORE FUNCTIONS
@@ -63,7 +63,7 @@ Gradebook createGradeBook()
 	//if the malloc function fails
 	if (head_record == NULL)
 	{
-		printf("Couldn't create a new grade book, not enough memory :(");
+		printf("\nCouldn't create a new grade book, not enough memory :(");
 		exit(0);
 	}
 
@@ -79,7 +79,7 @@ Record createNewRecord(Gradebook *gb, Record new_record)
 	//if the malloc function fails
 	if (new_rec_ptr == NULL)
 	{
-		printf("Couldn't create a new record, not enough memory :(");
+		printf("\nCouldn't create a new record, not enough memory :(");
 		exit(0);
 	}
 
@@ -97,26 +97,36 @@ Record createNewRecord(Gradebook *gb, Record new_record)
 	else
 	{
 		gb->tail->next = new_rec_ptr;
+		gb->tail = new_rec_ptr;
 	}
 
 	return *new_rec_ptr;
 }
 
-void findRecordByName(Gradebook * gb_ptr, char name[]) {
+void findRecordByName(Gradebook *gb_ptr, char name[])
+{
 	// if gradebook is empty
 	if (isGradeBookEmpty(gb_ptr))
 	{
-		printf("Gradebook is empty :(");
+		printf("\nGradebook is empty :(");
 		return;
 	}
 
-	Record * cur = gb_ptr->head;
+	// if length of the search name is greater than 50 characters, it will be truncated
+	if (strlen(name) > 50)
+	{
+		printf("\nLength of the name cannot be greater than 50 characters, it will be truncated for the search");
+		name[50] = '\0';
+	}
+
+	Record *cur = gb_ptr->head;
 
 	while (cur != NULL && !isStrEq(cur->name, name))
 		cur = cur->next;
 
-	if (cur == NULL) {
-		printf("Sorry record not found :(");
+	if (cur == NULL)
+	{
+		printf("\nSorry record not found :(");
 		return;
 	}
 
@@ -124,26 +134,135 @@ void findRecordByName(Gradebook * gb_ptr, char name[]) {
 	printRecord(cur);
 }
 
-void findRecordByRollNum(Gradebook * gb_ptr, rollNum roll_num) {
+void findRecordByRollNum(Gradebook *gb_ptr, rollNum roll_num)
+{
 	// if gradebook is empty
 	if (isGradeBookEmpty(gb_ptr))
 	{
-		printf("Gradebook is empty :(");
+		printf("\nGradebook is empty :(");
 		return;
 	}
 
-	Record * cur = gb_ptr->head;
+	Record *cur = gb_ptr->head;
 
 	while (cur != NULL && cur->roll_num != roll_num)
 		cur = cur->next;
 
-	if (cur == NULL) {
-		printf("Sorry record not found :(");
+	if (cur == NULL)
+	{
+		printf("\nSorry record not found :(");
 		return;
 	}
 
 	printf("\nRecord found:");
 	printRecord(cur);
+}
+
+Record updateNameInRecord(char new_name[], rollNum roll_num, Gradebook *gb_ptr)
+{
+	// if gradebook is empty
+	if (isGradeBookEmpty(gb_ptr))
+	{
+		printf("\nGradebook is empty :(");
+		return;
+	}
+
+	// if length of new name is greater than 50 characters, it will be truncated
+	if (strlen(new_name) > 50)
+	{
+		printf("\nLength of the name cannot be greater than 50 characters, it will be truncated");
+		new_name[50] = '\0';
+	}
+
+	Record *cur = gb_ptr->head;
+
+	while (cur != NULL && cur->roll_num != roll_num)
+		cur = cur->next;
+
+	if (cur == NULL)
+	{
+		printf("\nRecord not found :(");
+		return;
+	}
+
+	strcpy(cur->name, new_name);
+	return (*cur);
+}
+
+Record updateRollNumInRecord(char name[], rollNum new_roll_num, Gradebook *gb_ptr)
+{
+	// if gradebook is empty
+	if (isGradeBookEmpty(gb_ptr))
+	{
+		printf("\nGradebook is empty :(");
+		return;
+	}
+
+	// if length of the search name is greater than 50 characters, it will be truncated
+	if (strlen(name) > 50)
+	{
+		printf("\nLength of the name cannot be greater than 50 characters, it will be truncated for the search");
+		name[50] = '\0';
+	}
+
+	Record *cur = gb_ptr->head;
+
+	while (cur != NULL && !isStrEq(cur->name, name))
+		cur = cur->next;
+
+	if (cur == NULL)
+	{
+		printf("\nRecord not found :(");
+		return;
+	}
+
+	cur->roll_num = new_roll_num;
+	return (*cur);
+}
+
+Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, Gradebook *gb_ptr)
+{
+	// if gradebook is empty
+	if (isGradeBookEmpty(gb_ptr))
+	{
+		printf("\nGradebook is empty :(");
+		return;
+	}
+
+	Record *cur = gb_ptr->head;
+
+	if (isStrEq(name, "")) // update using the roll number
+	{
+		while (cur != NULL && cur->roll_num != roll_num)
+			cur = cur->next;
+	}
+	else if (roll_num = 0) // update using the name
+	{
+		// if length of the search name is greater than 50 characters, it will be truncated
+		if (strlen(name) > 50)
+		{
+			printf("\nLength of the search name cannot be greater than 50 characters, it will be truncated for the search");
+			name[50] = '\0';
+		}
+
+		while (cur != NULL && !isStrEq(cur->name, name))
+			cur = cur->next;
+	}
+	else
+	{
+		printf("Enter valid information");
+		return;
+	}
+
+	if (cur == NULL)
+	{
+		printf("\nRecord not found :(");
+		return;
+	}
+
+	cur->marks = new_ms;
+
+	return (*cur);
 }
 
 // just for testing puroses during development
