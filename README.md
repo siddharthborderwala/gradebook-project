@@ -70,6 +70,27 @@ Takes in a Pointer to Gradebook and a Roll Number
 Returns void
 */
 void findRecordByRollNum(Gradebook *, rollNum);
+
+/*
+Updates the name in a record
+Takes in a Pointer to Gradebook, a new Name and a search Roll Number
+Returns the updated Record/if record not found function terminates
+*/
+Record updateNameInRecord(char[], rollNum, Gradebook *);
+
+/*
+Updates the roll number in a record
+Takes in a Pointer to Gradebook, a search Name and a new Roll Number
+Returns the updated Record/if record not found function terminates
+*/
+Record updateRollNumInRecord(char[], rollNum, Gradebook *);
+
+/*
+Updates the marksheet in a record
+Takes in a Pointer to Gradebook, either a search Name or a search Roll Number and The new Marksheet
+Returns the updated Record/if record not found function terminates
+*/
+Record updateMarksheetInRecord(char[], rollNum, Marksheet, Gradebook *);
 ```  
 
 # features
