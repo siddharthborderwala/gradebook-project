@@ -128,3 +128,10 @@ Takes in a Pointer to Gradebook, either a search Name or a search Roll Number an
 Returns the updated Record/if record not found function terminates
 */
 Record updateMarksheetInRecord(char[], rollNum, Marksheet, Gradebook *);
+
+/*
+Prints a gradebook
+Takes in a Pointer to Gradebook
+Returns void
+*/
+void printGradebook(Gradebook *);
