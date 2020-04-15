@@ -130,6 +130,20 @@ Returns the updated Record/if record not found function terminates
 Record updateMarksheetInRecord(char[], rollNum, Marksheet, Gradebook *);
 
 /*
+Deletes a record in a gradebook
+Takes in either a search name or a search roll number and a pointer to gradebook
+Returns void
+*/
+void deleteRecord(char [], rollNum , Gradebook *);
+
+/*
+Deletes a gradebook
+Takes in a pointer to gradebook
+Returns void
+*/
+void deleteGradebook(Gradebook *);
+
+/*
 Prints a gradebook
 Takes in a Pointer to Gradebook
 Returns void

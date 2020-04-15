@@ -250,7 +250,7 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 	}
 	else
 	{
-		printf("Enter valid information");
+		printf("\nEnter valid information");
 		return;
 	}
 
@@ -263,6 +263,68 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 	cur->marks = new_ms;
 
 	return (*cur);
+}
+
+void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
+{
+	// if gradebook is empty
+	if (isGradeBookEmpty(gb_ptr))
+	{
+		printf("\nGradebook is empty");
+		return;
+	}
+
+	Record *cur = gb_ptr->head;
+	Record *prev = gb_ptr->head;
+
+	if (isStrEq(name, ""))
+	{
+		while (cur != NULL && cur->roll_num != roll_num)
+		{
+			prev = cur;
+			cur = cur->next;
+		}
+	}
+	else if (roll_num == 0)
+	{
+		// if length of the search name is greater than 50 characters, it will be truncated
+		if (strlen(name) > 50)
+		{
+			printf("\nLength of the search name cannot be greater than 50 characters, it will be truncated for the search");
+			name[50] = '\0';
+		}
+
+		while (cur != NULL && !isStrEq(cur->name, name))
+		{
+			prev = cur;
+			cur = cur->next;
+		}
+	}
+	else if (isStrEq(name, "") && roll_num == 0)
+	{
+		printf("\nEnter valid information to find the record to be deleted");
+		return;
+	}
+
+	if (cur == NULL)
+	{
+		printf("\nRecord not found :(");
+		return;
+	}
+
+	prev->next = cur->next;
+	if (cur->next == NULL)
+	{
+		//if the record to be deleted is the last one
+		gb_ptr->tail = prev;
+	}
+	else if (cur == gb_ptr->head)
+	{
+		// if the record to be deleted is the first one
+		gb_ptr->head = cur->next;
+	}
+
+	free(cur);
 }
 
 void printGradebook(Gradebook *gb_ptr)
@@ -285,6 +347,27 @@ void printGradebook(Gradebook *gb_ptr)
 	}
 
 	printf("\n------Task Over------\n");
+}
+
+void deleteGradebook(Gradebook * gb_ptr) {
+	// if the gradebook is empty
+	if (isGradeBookEmpty(gb_ptr))
+	{
+		printf("\nGradebook is empty :(");
+		return;
+	}
+
+	Record * cur = gb_ptr->head;
+	Record * prev = gb_ptr->head;
+
+	while (prev != NULL) {
+		prev = cur;
+		free(cur);
+		cur = prev->next;
+	}
+
+	free(gb_ptr->head);
+	free(gb_ptr->tail);
 }
 
 // just for testing purposes during development
