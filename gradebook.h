@@ -99,14 +99,14 @@ Prints if the record is found, if yes then prints record
 Takes in a Pointer to Gradebook and a Name
 Returns void
 */
-void findRecordByName(Gradebook *, char[]);
+Record findRecordByName(Gradebook *, char[]);
 
 /*
 Prints if the record is found, if yes then prints record
 Takes in a Pointer to Gradebook and a Roll Number
 Returns void
 */
-void findRecordByRollNum(Gradebook *, rollNum);
+Record findRecordByRollNum(Gradebook *, rollNum);
 
 /*
 Updates the name in a record

@@ -103,7 +103,7 @@ Record createNewRecord(Gradebook *gb, Record new_record)
 	return *new_rec_ptr;
 }
 
-void findRecordByName(Gradebook *gb_ptr, char name[])
+Record findRecordByName(Gradebook *gb_ptr, char name[])
 {
 	// if gradebook is empty
 	if (isGradeBookEmpty(gb_ptr))
@@ -132,9 +132,10 @@ void findRecordByName(Gradebook *gb_ptr, char name[])
 
 	printf("\nRecord found:");
 	printRecord(cur);
+	return (*cur);
 }
 
-void findRecordByRollNum(Gradebook *gb_ptr, rollNum roll_num)
+Record findRecordByRollNum(Gradebook *gb_ptr, rollNum roll_num)
 {
 	// if gradebook is empty
 	if (isGradeBookEmpty(gb_ptr))
@@ -156,6 +157,7 @@ void findRecordByRollNum(Gradebook *gb_ptr, rollNum roll_num)
 
 	printf("\nRecord found:");
 	printRecord(cur);
+	return (*cur);
 }
 
 Record updateNameInRecord(char new_name[], rollNum roll_num, Gradebook *gb_ptr)
