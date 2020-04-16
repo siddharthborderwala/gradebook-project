@@ -95,16 +95,16 @@ Returns the newly created Record
 Record createNewRecord(Gradebook *, Record);
 
 /*
-Prints if the record is found, if yes then prints record
+Finds the record by a search name if found returns and prints it
 Takes in a Pointer to Gradebook and a Name
-Returns void
+Returns the record if found
 */
 Record findRecordByName(Gradebook *, char[]);
 
 /*
-Prints if the record is found, if yes then prints record
+Finds the record by a search roll number if found returns and prints it
 Takes in a Pointer to Gradebook and a Roll Number
-Returns void
+Returns the record if found
 */
 Record findRecordByRollNum(Gradebook *, rollNum);
 
