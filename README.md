@@ -1,6 +1,15 @@
 # gradebook-project
 A gradebook, implementation of Linked List data structure
 
+# features
+  * Create Record
+  * Delete Record
+  * Update Record
+  * Read Record
+  * Create Gradebook
+  * Print GradeBook
+  * Delete GradeBook
+
 # docs
 ### The following is a reference for the defined data-structures  
 ```c
@@ -58,18 +67,18 @@ Returns the newly created Record
 Record createNewRecord(Gradebook *, Record);
 
 /*
-Prints if the record is found, if yes then prints record
+Finds the record by a search name if found returns and prints it
 Takes in a Pointer to Gradebook and a Name
-Returns void
+Returns the record if found
 */
-void findRecordByName(Gradebook *, char []);
+Record findRecordByName(Gradebook *, char[]);
 
 /*
-Prints if the record is found, if yes then prints record
+Finds the record by a search roll number if found returns and prints it
 Takes in a Pointer to Gradebook and a Roll Number
-Returns void
+Returns the record if found
 */
-void findRecordByRollNum(Gradebook *, rollNum);
+Record findRecordByRollNum(Gradebook *, rollNum);
 
 /*
 Updates the name in a record
@@ -91,16 +100,29 @@ Takes in a Pointer to Gradebook, either a search Name or a search Roll Number an
 Returns the updated Record/if record not found function terminates
 */
 Record updateMarksheetInRecord(char[], rollNum, Marksheet, Gradebook *);
-```  
 
-# features
-  * Create Record
-  * Delete Record
-  * Update Record
-  * Read Record
-  * Create Gradebook
-  * Print GradeBook
-  * Delete GradeBook
+/*
+Deletes a record in a gradebook
+Takes in either a search name or a search roll number and a pointer to gradebook
+Returns void
+*/
+void deleteRecord(char [], rollNum , Gradebook *);
+
+/*
+Deletes a gradebook
+Takes in a pointer to gradebook
+Returns void
+*/
+void deleteGradebook(Gradebook *);
+
+/*
+Prints a gradebook
+Takes in a Pointer to Gradebook
+Returns void
+*/
+void printGradebook(Gradebook *);
+```
+
 
 # contributors
 [Siddharth Borderwala](https://github.com/siddharthborderwala)  
