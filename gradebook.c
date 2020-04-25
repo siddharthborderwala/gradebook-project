@@ -27,7 +27,7 @@ void printMarksheet(Marksheet ms)
 
 void printRecord(Record *rec)
 {
-	printf("\nName:          %s", rec->name);
+	printf("\n\nName:          %s", rec->name);
 	printf("\nRoll Nummber:  %lld", rec->roll_num);
 	printf("\nMarksheet:");
 	printMarksheet(rec->marks);
@@ -103,7 +103,7 @@ Record createNewRecord(Gradebook *gb, Record new_record)
 	return *new_rec_ptr;
 }
 
-Record findRecordByName(Gradebook *gb_ptr, char name[])
+Record findRecordByName(Gradebook *gb_ptr, char name[], bool should_print)
 {
 	// if gradebook is empty
 	if (isGradeBookEmpty(gb_ptr))
@@ -126,16 +126,19 @@ Record findRecordByName(Gradebook *gb_ptr, char name[])
 
 	if (cur == NULL)
 	{
-		printf("\nSorry record not found :(");
+		printf("\nFinding record by name %s - Record not found", name);
 		return;
 	}
 
-	printf("\nRecord found:");
-	printRecord(cur);
+	if (should_print)
+	{
+		printf("\n\nRecord found:");
+		printRecord(cur);
+	}
 	return (*cur);
 }
 
-Record findRecordByRollNum(Gradebook *gb_ptr, rollNum roll_num)
+Record findRecordByRollNum(Gradebook *gb_ptr, rollNum roll_num, bool should_print)
 {
 	// if gradebook is empty
 	if (isGradeBookEmpty(gb_ptr))
@@ -151,12 +154,15 @@ Record findRecordByRollNum(Gradebook *gb_ptr, rollNum roll_num)
 
 	if (cur == NULL)
 	{
-		printf("\nSorry record not found :(");
+		printf("\nFinding record by Roll Number %lld - Record not found", roll_num);
 		return;
 	}
 
-	printf("\nRecord found:");
-	printRecord(cur);
+	if (should_print)
+	{
+		printf("\n\nRecord found:");
+		printRecord(cur);
+	}
 	return (*cur);
 }
 
@@ -183,7 +189,7 @@ Record updateNameInRecord(char new_name[], rollNum roll_num, Gradebook *gb_ptr)
 
 	if (cur == NULL)
 	{
-		printf("\nRecord not found :(");
+		printf("\nUpdating %lld - Record not found", roll_num);
 		return;
 	}
 
@@ -214,7 +220,7 @@ Record updateRollNumInRecord(char name[], rollNum new_roll_num, Gradebook *gb_pt
 
 	if (cur == NULL)
 	{
-		printf("\nRecord not found :(");
+		printf("\nUpdating Roll Number of %s - Record not found", name);
 		return;
 	}
 
@@ -258,7 +264,7 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 
 	if (cur == NULL)
 	{
-		printf("\nRecord not found :(");
+		printf("\nUpdating Marksheet of %s, %lld - Record not found", name, roll_num);
 		return;
 	}
 
@@ -310,7 +316,7 @@ void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
 
 	if (cur == NULL)
 	{
-		printf("\nRecord not found :(");
+		printf("\nWhile deleting %s - Record not found", name);
 		return;
 	}
 
@@ -340,7 +346,7 @@ void printGradebook(Gradebook *gb_ptr)
 
 	Record *cur = gb_ptr->head;
 
-	printf("\n------Gradebook------\n");
+	printf("\n------Gradebook------");
 
 	while (cur != NULL)
 	{
@@ -348,10 +354,11 @@ void printGradebook(Gradebook *gb_ptr)
 		cur = cur->next;
 	}
 
-	printf("\n------Task Over------\n");
+	printf("\n\n------Task Over------\n");
 }
 
-void deleteGradebook(Gradebook * gb_ptr) {
+void deleteGradebook(Gradebook *gb_ptr)
+{
 	// if the gradebook is empty
 	if (isGradeBookEmpty(gb_ptr))
 	{
@@ -359,21 +366,16 @@ void deleteGradebook(Gradebook * gb_ptr) {
 		return;
 	}
 
-	Record * cur = gb_ptr->head;
-	Record * prev = gb_ptr->head;
+	Record *cur = gb_ptr->head;
+	Record *next = gb_ptr->head;
 
-	while (prev != NULL) {
-		prev = cur;
+	while (cur != NULL)
+	{
+		next = cur->next;
 		free(cur);
-		cur = prev->next;
+		cur = next;
 	}
 
 	free(gb_ptr->head);
 	free(gb_ptr->tail);
-}
-
-// just for testing purposes during development
-void main()
-{
-	;
 }

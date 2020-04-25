@@ -1,3 +1,4 @@
+#include <stdbool.h>
 // -> -> STRUCTURE DEFINITIONS
 
 /*
@@ -95,18 +96,18 @@ Returns the newly created Record
 Record createNewRecord(Gradebook *, Record);
 
 /*
-Finds the record by a search name if found returns and prints it
+Finds the record by a search name if found returns and prints it if third argument is true
 Takes in a Pointer to Gradebook and a Name
 Returns the record if found
 */
-Record findRecordByName(Gradebook *, char[]);
+Record findRecordByName(Gradebook *, char[], bool);
 
 /*
-Finds the record by a search roll number if found returns and prints it
+Finds the record by a search roll number if found returns and prints it if third argument is true
 Takes in a Pointer to Gradebook and a Roll Number
 Returns the record if found
 */
-Record findRecordByRollNum(Gradebook *, rollNum);
+Record findRecordByRollNum(Gradebook *, rollNum, bool);
 
 /*
 Updates the name in a record
