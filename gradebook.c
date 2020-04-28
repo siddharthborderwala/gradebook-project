@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <stdbool.h>
 #include <string.h>
 
 #include "gradebook.h"
@@ -42,16 +43,16 @@ int isGradeBookEmpty(Gradebook *gb_ptr)
 		return 0;
 }
 
-int isStrEq(char a[], char b[])
+bool isStrEq(char a[], char b[])
 {
 	size_t len_a = strlen(a);
 	size_t len_b = strlen(b);
 	if (len_a != len_b)
-		return 0;
+		return false;
 	for (size_t i = 0; i <= len_a; i++)
 		if (a[i] != b[i])
-			return 0;
-	return 1;
+			return false;
+	return true;
 }
 
 // -> CORE FUNCTIONS

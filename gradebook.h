@@ -75,9 +75,9 @@ int isGradeBookEmpty(Gradebook *);
 /*
 Returns 1 if strings are equal
 Takes in two strings to compare
-Returns int
+Returns bool
 */
-int isStrEq(char[], char[]);
+bool isStrEq(char[], char[]);
 
 // -> core functions
 
