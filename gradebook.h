@@ -1,4 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <string.h>
 #include <stdbool.h>
+
 // -> -> STRUCTURE DEFINITIONS
 
 /*
@@ -72,20 +77,30 @@ Returns int
 */
 int isGradeBookEmpty(Gradebook *);
 
-/*
-Returns 1 if strings are equal
-Takes in two strings to compare
-Returns bool
-*/
-bool isStrEq(char[], char[]);
 
 // -> core functions
 
 /*
+Creates a new record in an existing gradebook
+Takes the input from the user for record data,
+that is, name, roll number, marksheet
+Creates the gradebook, if not alreday created.
+*/
+
+void addRecord(Gradebook *);
+
+/*
 Initializes a new Gradebook Object
+Takes in nothing
+*/
+void defdata(Gradebook *);
+
+/*
+Creates a new empty Gradebook Object
 Takes in nothing
 Returns Gradebook
 */
+
 Gradebook createGradeBook();
 
 /*
@@ -93,12 +108,11 @@ Creates a new record in an existing gradebook
 Takes in a Pointer to Gradebook and a Record Object
 Returns the newly created Record
 */
-Record createNewRecord(Gradebook *, Record);
+void createNewRecord(Gradebook *, Record);
 
 /*
 Finds the record by a search name if found returns and prints it if third argument is true
 Takes in a Pointer to Gradebook and a Name
-Returns the record if found
 */
 Record findRecordByName(Gradebook *, char[], bool);
 
@@ -138,6 +152,13 @@ Returns void
 void deleteRecord(char [], rollNum , Gradebook *);
 
 /*
+Deletes the record at the head of the gradebook
+Takes in a pointer to gradebook
+Returns void
+*/
+void deleteRecordHead(Gradebook *gb_ptr);
+
+/*
 Deletes a gradebook
 Takes in a pointer to gradebook
 Returns void
@@ -150,3 +171,34 @@ Takes in a Pointer to Gradebook
 Returns void
 */
 void printGradebook(Gradebook *);
+/*
+sorts the records in gradebook in ascending or descending order of name
+*/
+void sortGradebookName(Gradebook *, bool);
+/*
+sorts the records in gradebook in ascending or descending order of roll num
+*/
+void sortGradebookRollNum(Gradebook *, bool);
+/*
+Find the student with max total marks
+print this record
+*/
+void findTopper(Gradebook *);
+/*
+find the records of students who fail in 1 or more subjects
+print these records
+*/
+void findFailingStudents(Gradebook *);
+/*
+count the number of records in the gradebook
+return the number
+*/
+int countGradebookRecords(Gradebook *);
+/*
+print the grades and marksheet of each student in the gradereport 
+*/
+void printGrades(Gradebook *);
+/*
+print the relative grades of each student in the gradereport
+*/
+void printRelativeGrading(Gradebook *);

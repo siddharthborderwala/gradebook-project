@@ -10,6 +10,27 @@ A gradebook, implementation of Linked List data structure
   * Print GradeBook
   * Delete GradeBook
 
+# suggestions
+
+# These are added in menu and have corresponding empty functions in the gradebook.c file
+
+Sorting records in gradebook by name ascending/descending
+Sorting records in gradebook by roll number ascending/descending
+Creating a text file containing all test cases and running them on the program to see if they are working- this can be added to readme later
+Finding highest aggregate marks out of all the records in the gradebook
+Count the number of records in the gradebook
+Generate grade report of a student where each student is assigned a particular grade on the basis of marks.
+Generate a grade report based on relative grading system
+
+# Additional things to do
+These are not included in menu and also there is no empty function created for them in gradebook.c
+Finding lowest aggregate marks out of all the records in the gradebook
+Finding highest/lowest marks in a particular subject
+
+# Additional integrity checks that can be performed
+Check that marks entered should not be less than zero or greater than 100.
+String matching should be made case insensitive (strcmpi instead of strcmp)
+
 # docs
 ### The following is a reference for the defined data-structures  
 ```c

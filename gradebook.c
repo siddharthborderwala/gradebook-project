@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <malloc.h>
-#include <stdbool.h>
-#include <string.h>
-
 #include "gradebook.h"
 
 size_t record_size = sizeof(Record);
@@ -29,7 +23,7 @@ void printMarksheet(Marksheet ms)
 void printRecord(Record *rec)
 {
 	printf("\n\nName:          %s", rec->name);
-	printf("\nRoll Nummber:  %lld", rec->roll_num);
+	printf("\nRoll Number:  %lld", rec->roll_num);
 	printf("\nMarksheet:");
 	printMarksheet(rec->marks);
 	printf("\nAverage:       %5.2f", avgMarks(rec->marks));
@@ -43,19 +37,68 @@ int isGradeBookEmpty(Gradebook *gb_ptr)
 		return 0;
 }
 
-bool isStrEq(char a[], char b[])
+void addRecord(Gradebook *gb1)
 {
-	size_t len_a = strlen(a);
-	size_t len_b = strlen(b);
-	if (len_a != len_b)
-		return false;
-	for (size_t i = 0; i <= len_a; i++)
-		if (a[i] != b[i])
-			return false;
-	return true;
+	char name[50],ch;
+	rollNum roll_num;
+	Marksheet marks;
+	Record rec;	
+
+	scanf("%c",&ch); // temp statement to clear buffer
+	printf("\nEnter name: ");
+//	fgets(name, 50, stdin);  // read name string
+//	scanf("%c",&ch);
+	scanf("%[^\n]",name);
+	printf("\nEnter roll number:  ");
+	scanf("%lld",&roll_num);	
+	printf("Enter marksheet details:\n");
+	printf("\nEnter Maths marks: ");
+	scanf("%f", &marks.math);
+	printf("\nEnter English marks: ");
+	scanf("%f", &marks.english);
+	printf("\nEnter Science marks: ");
+	scanf("%f", &marks.science);
+	printf("\nEnter Social Science marks: ");
+	scanf("%f", &marks.social_science);
+	printf("\nEnter second language marks: ");
+	scanf("%f", &marks.sec_lang);
+	
+	strcpy(rec.name, name);
+	rec.roll_num=roll_num;
+	rec.marks=marks;
+	createNewRecord(gb1, rec);
 }
 
 // -> CORE FUNCTIONS
+void defdata(Gradebook * gb1)
+{
+//	Gradebook gb1 = createGradeBook();
+	createNewRecord(gb1, (Record) {
+		"Siddharth Borderwala",
+		1910110389,
+		(Marksheet) {98.2,97.5,99.0,97.2,98.6}
+	});
+	createNewRecord(gb1, (Record) {
+		"Niramay Kachhadiya",
+		1910110225,
+		(Marksheet) {98.2,97.5,99.0,97.2,98.6}
+	});
+	createNewRecord(gb1, (Record) {
+		"Yash Varshney",
+		1910110285,
+		(Marksheet) {98.2,97.5,99.0,97.2,98.6}
+	});
+	createNewRecord(gb1, (Record) {
+		"Samarth Gupta",
+		1910110300,
+		(Marksheet) {98.2,97.5,99.0,97.2,98.6}
+	});
+	createNewRecord(gb1, (Record) {
+		"Aarjav Desai",
+		1910110120,
+		(Marksheet) {98.2,97.5,99.0,97.2,98.6}
+	});
+}
 
 Gradebook createGradeBook()
 {
@@ -73,7 +116,7 @@ Gradebook createGradeBook()
 	return new_gb;
 }
 
-Record createNewRecord(Gradebook *gb, Record new_record)
+void createNewRecord(Gradebook *gb, Record new_record)
 {
 	Record *new_rec_ptr = (Record *)malloc(record_size);
 
@@ -100,12 +143,11 @@ Record createNewRecord(Gradebook *gb, Record new_record)
 		gb->tail->next = new_rec_ptr;
 		gb->tail = new_rec_ptr;
 	}
-
-	return *new_rec_ptr;
 }
 
 Record findRecordByName(Gradebook *gb_ptr, char name[], bool should_print)
 {
+	printf("findRecordByName\n");
 	// if gradebook is empty
 	if (isGradeBookEmpty(gb_ptr))
 	{
@@ -122,12 +164,18 @@ Record findRecordByName(Gradebook *gb_ptr, char name[], bool should_print)
 
 	Record *cur = gb_ptr->head;
 
-	while (cur != NULL && !isStrEq(cur->name, name))
+	while (cur != NULL && strcmp(cur->name, name)!=0)//isStrEq(cur->name, name)
+	{
+		printf("Searching\n");
+		printf("Start Searching for %s\n",name);
+		printf("curr record name =   %s\n",cur->name);		
+		printf("result of str cmp = %d\n", strcmp(cur->name, name));
+//		printRecord(cur);
 		cur = cur->next;
-
+	}
 	if (cur == NULL)
 	{
-		printf("\nFinding record by name %s - Record not found", name);
+		printf("\nFinding record by name %s - Record not found\n", name);
 		return;
 	}
 
@@ -155,7 +203,7 @@ Record findRecordByRollNum(Gradebook *gb_ptr, rollNum roll_num, bool should_prin
 
 	if (cur == NULL)
 	{
-		printf("\nFinding record by Roll Number %lld - Record not found", roll_num);
+		printf("\nFinding record by Roll Number %lld - Record not found\n", roll_num);
 		return;
 	}
 
@@ -190,7 +238,7 @@ Record updateNameInRecord(char new_name[], rollNum roll_num, Gradebook *gb_ptr)
 
 	if (cur == NULL)
 	{
-		printf("\nUpdating %lld - Record not found", roll_num);
+		printf("\nUpdating %lld - Record not found\n", roll_num);
 		return;
 	}
 
@@ -206,7 +254,6 @@ Record updateRollNumInRecord(char name[], rollNum new_roll_num, Gradebook *gb_pt
 		printf("\nGradebook is empty :(");
 		return;
 	}
-
 	// if length of the search name is greater than 50 characters, it will be truncated
 	if (strlen(name) > 50)
 	{
@@ -216,12 +263,12 @@ Record updateRollNumInRecord(char name[], rollNum new_roll_num, Gradebook *gb_pt
 
 	Record *cur = gb_ptr->head;
 
-	while (cur != NULL && !isStrEq(cur->name, name))
+	while (cur != NULL && (strcmp(cur->name, name)!=0))
 		cur = cur->next;
 
 	if (cur == NULL)
 	{
-		printf("\nUpdating Roll Number of %s - Record not found", name);
+		printf("\nUpdating Roll Number of %s - Record not found\n", name);
 		return;
 	}
 
@@ -240,7 +287,30 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 
 	Record *cur = gb_ptr->head;
 
-	if (isStrEq(name, "")) // update using the roll number
+	if (roll_num != 0) // update using the name
+	{
+		while (cur != NULL && cur->roll_num != roll_num)
+			cur = cur->next;
+	}
+	else if (strcmp(name, "")!=0) // update using the roll number isStrEq(name, "")
+	{
+		// if length of the search name is greater than 50 characters, it will be truncated
+		if (strlen(name) > 50)
+		{
+			printf("\nLength of the search name cannot be greater than 50 characters, it will be truncated for the search");
+			name[50] = '\0';
+		}
+
+		while (cur != NULL && strcmp(cur->name, name)!=0)//isStrEq
+			cur = cur->next;
+	}
+	else
+	{
+		printf("\nEnter valid information");
+		return;
+	}
+	/*
+	if (strcmp(name, "")) // update using the roll number isStrEq(name, "")
 	{
 		while (cur != NULL && cur->roll_num != roll_num)
 			cur = cur->next;
@@ -254,7 +324,7 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 			name[50] = '\0';
 		}
 
-		while (cur != NULL && !isStrEq(cur->name, name))
+		while (cur != NULL && !strcmp(cur->name, name))//isStrEq
 			cur = cur->next;
 	}
 	else
@@ -262,10 +332,11 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 		printf("\nEnter valid information");
 		return;
 	}
+*/
 
 	if (cur == NULL)
 	{
-		printf("\nUpdating Marksheet of %s, %lld - Record not found", name, roll_num);
+		printf("\nUpdating Marksheet of %s, %lld - Record not found\n", name, roll_num);
 		return;
 	}
 
@@ -285,8 +356,29 @@ void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
 
 	Record *cur = gb_ptr->head;
 	Record *prev = gb_ptr->head;
+	if(roll_num != 0)
+	{
+		while (cur != NULL && cur->roll_num != roll_num)
+		{
+			prev = cur;
+			cur = cur->next;
+		}
+	}
+	else if(strcmp(name, "")!=0)
+	{
+		while (cur != NULL && strcmp(cur->name, name)!=0)
+		{
+			prev = cur;
+			cur = cur->next;
+		}
+	}
+	else
+	{
+		printf("\nEnter valid information to find the record to be deleted");
+		return;
+	}
 
-	if (isStrEq(name, ""))
+/*	if (strcmp(name, ""))//isStrEq
 	{
 		while (cur != NULL && cur->roll_num != roll_num)
 		{
@@ -303,35 +395,37 @@ void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
 			name[50] = '\0';
 		}
 
-		while (cur != NULL && !isStrEq(cur->name, name))
+		while (cur != NULL && strcmp(cur->name, name)!=0)//isStrEq
 		{
 			prev = cur;
 			cur = cur->next;
 		}
 	}
-	else if (isStrEq(name, "") && roll_num == 0)
+	else if (strcmp(name, "") && roll_num == 0)//isStrEq
 	{
 		printf("\nEnter valid information to find the record to be deleted");
 		return;
-	}
+	}*/
 
 	if (cur == NULL)
 	{
-		printf("\nWhile deleting %s - Record not found", name);
+		printf("\nWhile deleting given data name = %s, roll no = %lld  - Record not found\n", name,roll_num);
 		return;
 	}
 
-	prev->next = cur->next;
 	if (cur->next == NULL)
 	{
 		//if the record to be deleted is the last one
 		gb_ptr->tail = prev;
+		prev->next=NULL;
 	}
 	else if (cur == gb_ptr->head)
 	{
 		// if the record to be deleted is the first one
 		gb_ptr->head = cur->next;
 	}
+	else
+		prev->next = cur->next;
 
 	free(cur);
 }
@@ -341,7 +435,7 @@ void printGradebook(Gradebook *gb_ptr)
 	// if the gradebook is empty
 	if (isGradeBookEmpty(gb_ptr))
 	{
-		printf("\nGradebook is empty :(");
+		printf("\nGradebook is empty :(\n");
 		return;
 	}
 
@@ -358,6 +452,29 @@ void printGradebook(Gradebook *gb_ptr)
 	printf("\n\n------Task Over------\n");
 }
 
+void deleteRecordHead(Gradebook *gb_ptr)
+{
+	// if the gradebook is empty
+	if (isGradeBookEmpty(gb_ptr))
+	{
+		printf("\nGradebook is empty :(");
+		return;
+	}
+
+	if (gb_ptr->head==gb_ptr->tail)
+	{
+		free(gb_ptr->head);
+		gb_ptr->head = NULL;
+		gb_ptr->tail=NULL;
+	}
+	else
+	{
+		Record *cur = gb_ptr->head;
+		gb_ptr->head = cur->next;
+		free(cur);
+	}
+}
+
 void deleteGradebook(Gradebook *gb_ptr)
 {
 	// if the gradebook is empty
@@ -367,16 +484,62 @@ void deleteGradebook(Gradebook *gb_ptr)
 		return;
 	}
 
-	Record *cur = gb_ptr->head;
-	Record *next = gb_ptr->head;
+	while (!isGradeBookEmpty(gb_ptr))
+		deleteRecordHead(gb_ptr);
+}
 
-	while (cur != NULL)
+
+void sortGradebookName(Gradebook *gb_ptr, bool asc)
+{
+	if (asc==true)
 	{
-		next = cur->next;
-		free(cur);
-		cur = next;
+		//sort the records in gradebook in ascending order of name
 	}
+	else
+	{
+		//sort the records in gradebook in descending order of name
+	}
+}
 
-	free(gb_ptr->head);
-	free(gb_ptr->tail);
+void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
+{
+	if (asc==true)
+	{
+		//sort the records in gradebook in ascending order of roll num
+	}
+	else
+	{
+		//sort the records in gradebook in descending order of roll num
+	}
+}
+
+void findTopper(Gradebook *gb_ptr)
+{
+	//find the record with maximum total marks
+	//print this record
+}
+
+void findFailingStudents(Gradebook *gb_ptr)
+{
+	//find the records of students who fail in 1 or more subjects
+	//print these records
+}
+
+int countGradebookRecords(Gradebook *gb_ptr)
+{
+	int cnt=0;
+	//count the number of records in the gradebook
+	//return the number
+	
+	return cnt;
+}
+
+void printGrades(Gradebook *gb_ptr)
+{
+	// print the grades and marksheet of each student in the gradereport 
+}
+
+void printRelativeGrading(Gradebook *gb_ptr)
+{
+	// print the relative grades of each student in the gradereport
 }
