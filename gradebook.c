@@ -516,6 +516,7 @@ void sortGradebookName(Gradebook *gb_ptr, bool asc)
 			}
 			i=i->next;
 		}
+	}
 	else
 	{
 		//sort the records in gradebook in descending order of roll num
@@ -582,6 +583,7 @@ void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
 			}
 			i=i->next;
 		}
+	}
 	else
 	{
 		//sort the records in gradebook in descending order of roll num
