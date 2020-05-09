@@ -485,26 +485,134 @@ void deleteGradebook(Gradebook *gb_ptr)
 
 void sortGradebookName(Gradebook *gb_ptr, bool asc)
 {
+	Record * i,*j,k;
+	
+	i=gb_ptr->head;
+	
 	if (asc == true)
-	{
-		//sort the records in gradebook in ascending order of name
-	}
+	{//	printf("Inside function\n");
+		while(i!=gb_ptr->tail)
+		{
+		//	printf("Inside i while roll num=%lld\n",i->roll_num);
+			j=i->next;
+			while(j!=NULL)
+			{
+			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+			
+				if(strcmp(i->name,j->name)>0)
+				{
+					k.roll_num=i->roll_num;
+					i->roll_num=j->roll_num;
+					j->roll_num=k.roll_num;
+					k.marks=i->marks;
+					i->marks=j->marks;
+					j->marks=k.marks;
+					strcpy(k.name,i->name);
+					strcpy(i->name,j->name);
+					strcpy(j->name,k.name);
+				}
+				j=j->next;
+			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+			}
+			i=i->next;
+		}
 	else
 	{
-		//sort the records in gradebook in descending order of name
+		//sort the records in gradebook in descending order of roll num
+		while(i!=gb_ptr->tail)
+		{
+		//	printf("Inside i while roll num=%lld\n",i->roll_num);
+			j=i->next;
+			while(j!=NULL)
+			{
+			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+			
+				if(strcmp(i->name,j->name)<0)
+				{
+					k.roll_num=i->roll_num;
+					i->roll_num=j->roll_num;
+					j->roll_num=k.roll_num;
+					k.marks=i->marks;
+					i->marks=j->marks;
+					j->marks=k.marks;
+					strcpy(k.name,i->name);
+					strcpy(i->name,j->name);
+					strcpy(j->name,k.name);
+				}
+				j=j->next;
+			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+			}
+			i=i->next;
+		}
 	}
+
+	printf("Gradebook is sorted by name\n");
 }
 
 void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
 {
+	Record * i,*j,k;
+	
+	i=gb_ptr->head;
+	
 	if (asc == true)
-	{
-		//sort the records in gradebook in ascending order of roll num
-	}
+	{//	printf("Inside function\n");
+		while(i!=gb_ptr->tail)
+		{
+		//	printf("Inside i while roll num=%lld\n",i->roll_num);
+			j=i->next;
+			while(j!=NULL)
+			{
+			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+			
+				if(i->roll_num>j->roll_num)
+				{
+					k.roll_num=i->roll_num;
+					i->roll_num=j->roll_num;
+					j->roll_num=k.roll_num;
+					k.marks=i->marks;
+					i->marks=j->marks;
+					j->marks=k.marks;
+					strcpy(k.name,i->name);
+					strcpy(i->name,j->name);
+					strcpy(j->name,k.name);
+				}
+				j=j->next;
+			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+			}
+			i=i->next;
+		}
 	else
 	{
 		//sort the records in gradebook in descending order of roll num
+		while(i!=gb_ptr->tail)
+		{
+		//	printf("Inside i while roll num=%lld\n",i->roll_num);
+			j=i->next;
+			while(j!=NULL)
+			{
+			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+			
+				if(i->roll_num<j->roll_num)
+				{
+					k.roll_num=i->roll_num;
+					i->roll_num=j->roll_num;
+					j->roll_num=k.roll_num;
+					k.marks=i->marks;
+					i->marks=j->marks;
+					j->marks=k.marks;
+					strcpy(k.name,i->name);
+					strcpy(i->name,j->name);
+					strcpy(j->name,k.name);
+				}
+				j=j->next;
+			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+			}
+			i=i->next;
+		}
 	}
+
+	printf("Gradebook is sorted by roll number\n");
 }
 
 void findTopper(Gradebook *gb_ptr)
