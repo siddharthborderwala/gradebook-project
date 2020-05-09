@@ -13,7 +13,7 @@ void main()
 
 	while (1)
 	{
-		printf("0.Exit\n");
+		printf("\n0.Exit\n");
 		printf("1.Use default gradebook\n");
 		printf("2.Insert a record in gradebook\n");
 		printf("3.Delete the first record\n");
@@ -45,6 +45,7 @@ void main()
 			exit(0);
 			break;
 		case 1:
+			printf("\nDefault data is being used . . . .\n");
 			defdata(&gb1);
 			break;
 		case 2:
@@ -79,7 +80,7 @@ void main()
 			//fgets(name, 50, stdin);  // read name string
 			scanf("%[^\n]", name);
 			cnt = strcmp(name, "Samarth Gupta");
-			printf("enetreed strng %s is same as Samarth Gupta %d \n", name, cnt);
+
 			scanf("%c", &ch);
 			findRecordByName(&gb1, name, true); //true for printing the found record
 			break;
@@ -129,6 +130,7 @@ void main()
 			printf("\nEnter second language marks: ");
 			scanf("%f", &marks.sec_lang);
 			rec1 = updateMarksheetInRecord(name, roll_num, marks, &gb1);
+			printf("\nThe updated record is:\n");
 			printRecord(&rec1);
 			break;
 		case 12:
@@ -148,25 +150,35 @@ void main()
 			printf("\nEnter second language marks: ");
 			scanf("%f", &marks.sec_lang);
 			rec1 = updateMarksheetInRecord(name, roll_num, marks, &gb1);
+			printf("\nThe updated record is:\n");
 			printRecord(&rec1);
 			break;
 		case 13: //sort ascending
 			sortGradebookName(&gb1, true);
+			printf("The sorted gradebook is:\n");
+			printGradebook(&gb1);
 			break;
 		case 14: //sort descending
 			sortGradebookName(&gb1, false);
+			printf("The sorted gradebook is:\n");
+			printGradebook(&gb1);
 			break;
 		case 15: //sort ascending
 			sortGradebookRollNum(&gb1, true);
+			printf("The sorted gradebook is:\n");
+			printGradebook(&gb1);
 			break;
 		case 16: //sort descending
 			sortGradebookRollNum(&gb1, false);
+			printf("The sorted gradebook is:\n");
+			printGradebook(&gb1);
 			break;
 		case 17:
+			printf("The record details of the topper are:");
 			findTopper(&gb1);
 			break;
 		case 18:
-			findFailingStudents(&gb1);
+			findFailingStudents(&gb1); //not working
 			break;
 		case 19:
 			printGradebook(&gb1);
@@ -176,13 +188,13 @@ void main()
 			printf("\nNumber of records in the gradebook = %d", cnt);
 			break;
 		case 21:
-			printGrades(&gb1);
+			printGradebook(&gb1);
 			break;
 		case 22:
 			printRelativeGrading(&gb1);
 			break;
 		case 23:
-			system("clear");
+			system("cls"); //'clear' may not work in some systems
 			break;
 		default:
 			printf("\nEnter valid option\n");
