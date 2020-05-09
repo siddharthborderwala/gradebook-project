@@ -77,7 +77,6 @@ Returns int
 */
 int isGradeBookEmpty(Gradebook *);
 
-
 // -> core functions
 
 /*
@@ -149,7 +148,7 @@ Deletes a record in a gradebook
 Takes in either a search name or a search roll number and a pointer to gradebook
 Returns void
 */
-void deleteRecord(char [], rollNum , Gradebook *);
+void deleteRecord(char[], rollNum, Gradebook *);
 
 /*
 Deletes the record at the head of the gradebook

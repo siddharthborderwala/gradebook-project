@@ -74,25 +74,25 @@ void defdata(Gradebook *gb1)
 {
 	//	Gradebook gb1 = createGradeBook();
 	createNewRecord(gb1, (Record){
-							 "Siddharth Borderwala",
-							 1910110389,
-							 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
+													 "Siddharth Borderwala",
+													 1910110389,
+													 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
 	createNewRecord(gb1, (Record){
-							 "Niramay Kachhadiya",
-							 1910110225,
-							 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
+													 "Niramay Kachhadiya",
+													 1910110225,
+													 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
 	createNewRecord(gb1, (Record){
-							 "Yash Varshney",
-							 1910110285,
-							 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
+													 "Yash Varshney",
+													 1910110285,
+													 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
 	createNewRecord(gb1, (Record){
-							 "Samarth Gupta",
-							 1910110300,
-							 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
+													 "Samarth Gupta",
+													 1910110300,
+													 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
 	createNewRecord(gb1, (Record){
-							 "Aarjav Desai",
-							 1910110120,
-							 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
+													 "Aarjav Desai",
+													 1910110120,
+													 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
 }
 
 Gradebook createGradeBook()
@@ -485,65 +485,65 @@ void deleteGradebook(Gradebook *gb_ptr)
 
 void sortGradebookName(Gradebook *gb_ptr, bool asc)
 {
-	Record * i,*j,k;
-	
-	i=gb_ptr->head;
-	
+	Record *i, *j, k;
+
+	i = gb_ptr->head;
+
 	if (asc == true)
-	{//	printf("Inside function\n");
-		while(i!=gb_ptr->tail)
+	{ //	printf("Inside function\n");
+		while (i != gb_ptr->tail)
 		{
-		//	printf("Inside i while roll num=%lld\n",i->roll_num);
-			j=i->next;
-			while(j!=NULL)
+			//	printf("Inside i while roll num=%lld\n",i->roll_num);
+			j = i->next;
+			while (j != NULL)
 			{
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
-			
-				if(strcmp(i->name,j->name)>0)
+				//	printf("Inside j while roll number=%lld\n",j->roll_num);
+
+				if (strcmp(i->name, j->name) > 0)
 				{
-					k.roll_num=i->roll_num;
-					i->roll_num=j->roll_num;
-					j->roll_num=k.roll_num;
-					k.marks=i->marks;
-					i->marks=j->marks;
-					j->marks=k.marks;
-					strcpy(k.name,i->name);
-					strcpy(i->name,j->name);
-					strcpy(j->name,k.name);
+					k.roll_num = i->roll_num;
+					i->roll_num = j->roll_num;
+					j->roll_num = k.roll_num;
+					k.marks = i->marks;
+					i->marks = j->marks;
+					j->marks = k.marks;
+					strcpy(k.name, i->name);
+					strcpy(i->name, j->name);
+					strcpy(j->name, k.name);
 				}
-				j=j->next;
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+				j = j->next;
+				//	printf("Inside j while roll number=%lld\n",j->roll_num);
 			}
-			i=i->next;
+			i = i->next;
 		}
 	}
 	else
 	{
 		//sort the records in gradebook in descending order of roll num
-		while(i!=gb_ptr->tail)
+		while (i != gb_ptr->tail)
 		{
-		//	printf("Inside i while roll num=%lld\n",i->roll_num);
-			j=i->next;
-			while(j!=NULL)
+			//	printf("Inside i while roll num=%lld\n",i->roll_num);
+			j = i->next;
+			while (j != NULL)
 			{
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
-			
-				if(strcmp(i->name,j->name)<0)
+				//	printf("Inside j while roll number=%lld\n",j->roll_num);
+
+				if (strcmp(i->name, j->name) < 0)
 				{
-					k.roll_num=i->roll_num;
-					i->roll_num=j->roll_num;
-					j->roll_num=k.roll_num;
-					k.marks=i->marks;
-					i->marks=j->marks;
-					j->marks=k.marks;
-					strcpy(k.name,i->name);
-					strcpy(i->name,j->name);
-					strcpy(j->name,k.name);
+					k.roll_num = i->roll_num;
+					i->roll_num = j->roll_num;
+					j->roll_num = k.roll_num;
+					k.marks = i->marks;
+					i->marks = j->marks;
+					j->marks = k.marks;
+					strcpy(k.name, i->name);
+					strcpy(i->name, j->name);
+					strcpy(j->name, k.name);
 				}
-				j=j->next;
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+				j = j->next;
+				//	printf("Inside j while roll number=%lld\n",j->roll_num);
 			}
-			i=i->next;
+			i = i->next;
 		}
 	}
 
@@ -552,65 +552,65 @@ void sortGradebookName(Gradebook *gb_ptr, bool asc)
 
 void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
 {
-	Record * i,*j,k;
-	
-	i=gb_ptr->head;
-	
+	Record *i, *j, k;
+
+	i = gb_ptr->head;
+
 	if (asc == true)
-	{//	printf("Inside function\n");
-		while(i!=gb_ptr->tail)
+	{ //	printf("Inside function\n");
+		while (i != gb_ptr->tail)
 		{
-		//	printf("Inside i while roll num=%lld\n",i->roll_num);
-			j=i->next;
-			while(j!=NULL)
+			//	printf("Inside i while roll num=%lld\n",i->roll_num);
+			j = i->next;
+			while (j != NULL)
 			{
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
-			
-				if(i->roll_num>j->roll_num)
+				//	printf("Inside j while roll number=%lld\n",j->roll_num);
+
+				if (i->roll_num > j->roll_num)
 				{
-					k.roll_num=i->roll_num;
-					i->roll_num=j->roll_num;
-					j->roll_num=k.roll_num;
-					k.marks=i->marks;
-					i->marks=j->marks;
-					j->marks=k.marks;
-					strcpy(k.name,i->name);
-					strcpy(i->name,j->name);
-					strcpy(j->name,k.name);
+					k.roll_num = i->roll_num;
+					i->roll_num = j->roll_num;
+					j->roll_num = k.roll_num;
+					k.marks = i->marks;
+					i->marks = j->marks;
+					j->marks = k.marks;
+					strcpy(k.name, i->name);
+					strcpy(i->name, j->name);
+					strcpy(j->name, k.name);
 				}
-				j=j->next;
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+				j = j->next;
+				//	printf("Inside j while roll number=%lld\n",j->roll_num);
 			}
-			i=i->next;
+			i = i->next;
 		}
 	}
 	else
 	{
 		//sort the records in gradebook in descending order of roll num
-		while(i!=gb_ptr->tail)
+		while (i != gb_ptr->tail)
 		{
-		//	printf("Inside i while roll num=%lld\n",i->roll_num);
-			j=i->next;
-			while(j!=NULL)
+			//	printf("Inside i while roll num=%lld\n",i->roll_num);
+			j = i->next;
+			while (j != NULL)
 			{
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
-			
-				if(i->roll_num<j->roll_num)
+				//	printf("Inside j while roll number=%lld\n",j->roll_num);
+
+				if (i->roll_num < j->roll_num)
 				{
-					k.roll_num=i->roll_num;
-					i->roll_num=j->roll_num;
-					j->roll_num=k.roll_num;
-					k.marks=i->marks;
-					i->marks=j->marks;
-					j->marks=k.marks;
-					strcpy(k.name,i->name);
-					strcpy(i->name,j->name);
-					strcpy(j->name,k.name);
+					k.roll_num = i->roll_num;
+					i->roll_num = j->roll_num;
+					j->roll_num = k.roll_num;
+					k.marks = i->marks;
+					i->marks = j->marks;
+					j->marks = k.marks;
+					strcpy(k.name, i->name);
+					strcpy(i->name, j->name);
+					strcpy(j->name, k.name);
 				}
-				j=j->next;
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
+				j = j->next;
+				//	printf("Inside j while roll number=%lld\n",j->roll_num);
 			}
-			i=i->next;
+			i = i->next;
 		}
 	}
 
