@@ -39,18 +39,18 @@ int isGradeBookEmpty(Gradebook *gb_ptr)
 
 void addRecord(Gradebook *gb1)
 {
-	char name[50],ch;
+	char name[50], ch;
 	rollNum roll_num;
 	Marksheet marks;
-	Record rec;	
+	Record rec;
 
-	scanf("%c",&ch); // temp statement to clear buffer
+	scanf("%c", &ch); // temp statement to clear buffer
 	printf("\nEnter name: ");
-//	fgets(name, 50, stdin);  // read name string
-//	scanf("%c",&ch);
-	scanf("%[^\n]",name);
+	//	fgets(name, 50, stdin);  // read name string
+	//	scanf("%c",&ch);
+	scanf("%[^\n]", name);
 	printf("\nEnter roll number:  ");
-	scanf("%lld",&roll_num);	
+	scanf("%lld", &roll_num);
 	printf("Enter marksheet details:\n");
 	printf("\nEnter Maths marks: ");
 	scanf("%f", &marks.math);
@@ -62,42 +62,37 @@ void addRecord(Gradebook *gb1)
 	scanf("%f", &marks.social_science);
 	printf("\nEnter second language marks: ");
 	scanf("%f", &marks.sec_lang);
-	
+
 	strcpy(rec.name, name);
-	rec.roll_num=roll_num;
-	rec.marks=marks;
+	rec.roll_num = roll_num;
+	rec.marks = marks;
 	createNewRecord(gb1, rec);
 }
 
 // -> CORE FUNCTIONS
-void defdata(Gradebook * gb1)
+void defdata(Gradebook *gb1)
 {
-//	Gradebook gb1 = createGradeBook();
-	createNewRecord(gb1, (Record) {
-		"Siddharth Borderwala",
-		1910110389,
-		(Marksheet) {98.2,97.5,99.0,97.2,98.6}
-	});
-	createNewRecord(gb1, (Record) {
-		"Niramay Kachhadiya",
-		1910110225,
-		(Marksheet) {98.2,97.5,99.0,97.2,98.6}
-	});
-	createNewRecord(gb1, (Record) {
-		"Yash Varshney",
-		1910110285,
-		(Marksheet) {98.2,97.5,99.0,97.2,98.6}
-	});
-	createNewRecord(gb1, (Record) {
-		"Samarth Gupta",
-		1910110300,
-		(Marksheet) {98.2,97.5,99.0,97.2,98.6}
-	});
-	createNewRecord(gb1, (Record) {
-		"Aarjav Desai",
-		1910110120,
-		(Marksheet) {98.2,97.5,99.0,97.2,98.6}
-	});
+	//	Gradebook gb1 = createGradeBook();
+	createNewRecord(gb1, (Record){
+							 "Siddharth Borderwala",
+							 1910110389,
+							 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
+	createNewRecord(gb1, (Record){
+							 "Niramay Kachhadiya",
+							 1910110225,
+							 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
+	createNewRecord(gb1, (Record){
+							 "Yash Varshney",
+							 1910110285,
+							 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
+	createNewRecord(gb1, (Record){
+							 "Samarth Gupta",
+							 1910110300,
+							 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
+	createNewRecord(gb1, (Record){
+							 "Aarjav Desai",
+							 1910110120,
+							 (Marksheet){98.2, 97.5, 99.0, 97.2, 98.6}});
 }
 
 Gradebook createGradeBook()
@@ -164,13 +159,13 @@ Record findRecordByName(Gradebook *gb_ptr, char name[], bool should_print)
 
 	Record *cur = gb_ptr->head;
 
-	while (cur != NULL && strcmp(cur->name, name)!=0)//isStrEq(cur->name, name)
+	while (cur != NULL && strcmp(cur->name, name) != 0) //isStrEq(cur->name, name)
 	{
 		printf("Searching\n");
-		printf("Start Searching for %s\n",name);
-		printf("curr record name =   %s\n",cur->name);		
+		printf("Start Searching for %s\n", name);
+		printf("curr record name =   %s\n", cur->name);
 		printf("result of str cmp = %d\n", strcmp(cur->name, name));
-//		printRecord(cur);
+		//		printRecord(cur);
 		cur = cur->next;
 	}
 	if (cur == NULL)
@@ -263,7 +258,7 @@ Record updateRollNumInRecord(char name[], rollNum new_roll_num, Gradebook *gb_pt
 
 	Record *cur = gb_ptr->head;
 
-	while (cur != NULL && (strcmp(cur->name, name)!=0))
+	while (cur != NULL && (strcmp(cur->name, name) != 0))
 		cur = cur->next;
 
 	if (cur == NULL)
@@ -292,7 +287,7 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 		while (cur != NULL && cur->roll_num != roll_num)
 			cur = cur->next;
 	}
-	else if (strcmp(name, "")!=0) // update using the roll number isStrEq(name, "")
+	else if (strcmp(name, "") != 0) // update using the roll number isStrEq(name, "")
 	{
 		// if length of the search name is greater than 50 characters, it will be truncated
 		if (strlen(name) > 50)
@@ -301,7 +296,7 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 			name[50] = '\0';
 		}
 
-		while (cur != NULL && strcmp(cur->name, name)!=0)//isStrEq
+		while (cur != NULL && strcmp(cur->name, name) != 0) //isStrEq
 			cur = cur->next;
 	}
 	else
@@ -356,7 +351,7 @@ void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
 
 	Record *cur = gb_ptr->head;
 	Record *prev = gb_ptr->head;
-	if(roll_num != 0)
+	if (roll_num != 0)
 	{
 		while (cur != NULL && cur->roll_num != roll_num)
 		{
@@ -364,9 +359,9 @@ void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
 			cur = cur->next;
 		}
 	}
-	else if(strcmp(name, "")!=0)
+	else if (strcmp(name, "") != 0)
 	{
-		while (cur != NULL && strcmp(cur->name, name)!=0)
+		while (cur != NULL && strcmp(cur->name, name) != 0)
 		{
 			prev = cur;
 			cur = cur->next;
@@ -378,7 +373,7 @@ void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
 		return;
 	}
 
-/*	if (strcmp(name, ""))//isStrEq
+	/*	if (strcmp(name, ""))//isStrEq
 	{
 		while (cur != NULL && cur->roll_num != roll_num)
 		{
@@ -409,7 +404,7 @@ void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
 
 	if (cur == NULL)
 	{
-		printf("\nWhile deleting given data name = %s, roll no = %lld  - Record not found\n", name,roll_num);
+		printf("\nWhile deleting given data name = %s, roll no = %lld  - Record not found\n", name, roll_num);
 		return;
 	}
 
@@ -417,7 +412,7 @@ void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
 	{
 		//if the record to be deleted is the last one
 		gb_ptr->tail = prev;
-		prev->next=NULL;
+		prev->next = NULL;
 	}
 	else if (cur == gb_ptr->head)
 	{
@@ -461,11 +456,11 @@ void deleteRecordHead(Gradebook *gb_ptr)
 		return;
 	}
 
-	if (gb_ptr->head==gb_ptr->tail)
+	if (gb_ptr->head == gb_ptr->tail)
 	{
 		free(gb_ptr->head);
 		gb_ptr->head = NULL;
-		gb_ptr->tail=NULL;
+		gb_ptr->tail = NULL;
 	}
 	else
 	{
@@ -487,7 +482,6 @@ void deleteGradebook(Gradebook *gb_ptr)
 	while (!isGradeBookEmpty(gb_ptr))
 		deleteRecordHead(gb_ptr);
 }
-
 
 void sortGradebookName(Gradebook *gb_ptr, bool asc)
 {
@@ -522,7 +516,6 @@ void sortGradebookName(Gradebook *gb_ptr, bool asc)
 			}
 			i=i->next;
 		}
-	}
 	else
 	{
 		//sort the records in gradebook in descending order of roll num
@@ -589,7 +582,6 @@ void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
 			}
 			i=i->next;
 		}
-	}
 	else
 	{
 		//sort the records in gradebook in descending order of roll num
@@ -627,26 +619,48 @@ void findTopper(Gradebook *gb_ptr)
 {
 	//find the record with maximum total marks
 	//print this record
+	Record *cur = gb_ptr->head;
+	Record max = *cur;
+
+	while (cur != NULL)
+	{
+		if (avgMarks(cur->marks) > avgMarks(max.marks))
+			max = *cur;
+		cur = cur->next;
+	}
+
+	printRecord(&max);
 }
 
 void findFailingStudents(Gradebook *gb_ptr)
 {
 	//find the records of students who fail in 1 or more subjects
 	//print these records
+	Record *cur = gb_ptr->head;
+
+	while (cur != NULL)
+	{
+		Marksheet marks = cur->marks;
+		if (!(marks.english >= 33 && marks.math >= 33 && marks.science >= 33 && marks.sec_lang >= 33 && marks.social_science >= 33))
+		{
+			printf("\nFailed");
+			printRecord(cur);
+		}
+	}
 }
 
 int countGradebookRecords(Gradebook *gb_ptr)
 {
-	int cnt=0;
-	//count the number of records in the gradebook
-	//return the number
-	
-	return cnt;
-}
+	int count = 0;
+	Record *cur = gb_ptr->head;
 
-void printGrades(Gradebook *gb_ptr)
-{
-	// print the grades and marksheet of each student in the gradereport 
+	while (cur != NULL)
+	{
+		cur = cur->next;
+		count++;
+	}
+
+	return count;
 }
 
 void printRelativeGrading(Gradebook *gb_ptr)

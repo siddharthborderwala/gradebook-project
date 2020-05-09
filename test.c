@@ -139,16 +139,16 @@ void main()
 			printRecord(&rec1);
 				break;
 			case 13: //sort ascending
-			//sortGradebookName(&gb1,true);
+			sortGradebookName(&gb1,true);
 				break;
 			case 14: //sort descending
-			//sortGradebookName(&gb1,false);
+			sortGradebookName(&gb1,false);
 				break;
 			case 15: //sort ascending
-			//sortGradebookRollNum(&gb1,true);
+			sortGradebookRollNum(&gb1,true);
 				break;
 			case 16: //sort descending
-			//sortGradebookRollNum(&gb1,false);
+			sortGradebookRollNum(&gb1,false);
 				break;
 			case 17: 
 			//findTopper(&gb1);
