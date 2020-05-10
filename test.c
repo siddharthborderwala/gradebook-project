@@ -35,7 +35,8 @@ void main()
 		printf("19.Print gradebook\n");
 		printf("20.Count and Print number of students in gradebook\n");
 		printf("21.Print relative grading for all the students \n");
-		printf("22.Clear screen\n");
+		printf("22.Print absolute grading for all the students \n");
+		printf("23.Clear screen\n");
 		printf("\nEnter a menu choice: ");
 		scanf("%d", &menu);
 		switch (menu)
@@ -51,13 +52,28 @@ void main()
 			addRecord(&gb1);
 			break;
 		case 3:
+			if (!isGradeBookEmpty(&gb1))
+			printf("\nDeleting the first record . . .DELETED!\n");
 			deleteRecordHead(&gb1);
 			break;
 		case 4:
 			scanf("%c", &ch);
 			printf("\nEnter name: ");
 			scanf("%[^\n]", name);
+			if(chck_namedup(&gb1,name)==1)
+			{
+            printf("\nThere are more than 1 students with same name!\n Please enter the roll number of student record to be deleted\n");
+			scanf("%c", &ch);
+			printf("\nEnter roll number:  ");
+			scanf("%lld", &roll_num);
+			strcpy(name, "");
+			if (!isGradeBookEmpty(&gb1))
+			printf("\nDeleting record . . .DELETED!\n");
+			deleteRecord(name, roll_num, &gb1);
+			}
 			roll_num = 0;
+			if (!isGradeBookEmpty(&gb1))
+			printf("\nDeleting record . . .DELETED!\n");
 			deleteRecord(name, roll_num, &gb1);
 			break;
 		case 5:
@@ -65,16 +81,20 @@ void main()
 			printf("\nEnter roll number:  ");
 			scanf("%lld", &roll_num);
 			strcpy(name, "");
+			if (!isGradeBookEmpty(&gb1))
+			printf("\nDeleting record . . .DELETED!\n");
 			deleteRecord(name, roll_num, &gb1);
 			break;
 		case 6:
+			if (!isGradeBookEmpty(&gb1))
+			printf("\nAll records have been deleted! As good as new!\n");
 			deleteGradebook(&gb1);
 			break;
 		case 7:
 			scanf("%c", &ch);
 			printf("\nEnter name: ");
 			scanf("%[^\n]", name);
-			cnt = strcmp(name, "Samarth Gupta");
+			cnt = strcmpi(name, "Samarth Gupta");
 
 			scanf("%c", &ch);
 			findRecordByName(&gb1, name, true);
@@ -115,7 +135,7 @@ void main()
 	scanf("%f", &marks.math);
 	if(marks.math<0 || marks.math>100)
     {
-        printf("enter marks in valid range(0-100)");
+        printf("Please enter marks in valid range(0-100):");
     }
 	}while(marks.math>100 || marks.math<0);
 	printf("\nEnter English marks: ");
@@ -123,7 +143,7 @@ void main()
 	scanf("%f", &marks.english);
 	if(marks.english<0 || marks.english>100)
     {
-        printf("enter marks in valid range(0-100)");
+        printf("Please enter marks in valid range(0-100):");
     }
 	}while(marks.english>100 || marks.english<0);
 	printf("\nEnter Science marks: ");
@@ -131,7 +151,7 @@ void main()
 	scanf("%f", &marks.science);
 	if(marks.science<0 || marks.science>100)
     {
-        printf("enter marks in valid range(0-100)");
+        printf("Please enter marks in valid range(0-100):");
     }
 	}while(marks.science>100 || marks.science<0);
 	printf("\nEnter Social Science marks: ");
@@ -139,7 +159,7 @@ void main()
 	scanf("%f", &marks.social_science);
 	if(marks.social_science<0 || marks.social_science>100)
     {
-        printf("enter marks in valid range(0-100)");
+        printf("Please enter marks in valid range(0-100):");
     }
 	}while(marks.social_science>100 || marks.social_science<0);
 	printf("\nEnter second language marks: ");
@@ -147,7 +167,7 @@ void main()
 	scanf("%f", &marks.sec_lang);
 	if(marks.sec_lang<0 || marks.sec_lang>100)
     {
-        printf("enter marks in valid range(0-100)");
+        printf("Please enter marks in valid range(0-100):");
     }
 	}while(marks.sec_lang>100 || marks.sec_lang<0);
 			rec1 = updateMarksheetInRecord(name, roll_num, marks, &gb1);
@@ -155,21 +175,51 @@ void main()
 			printRecord(&rec1);
 			break;
 		case 12:
-			scanf("%c", &ch);printf("\nEnter roll number:  ");
+			scanf("%c", &ch);
 			printf("\nEnter roll number:  ");
 			scanf("%lld", &roll_num);
 			strcpy(name, "");
 			printf("\nEnter new marksheet details:\n");
 			printf("\nEnter Maths marks: ");
-			scanf("%f", &marks.math);
-			printf("\nEnter English marks: ");
-			scanf("%f", &marks.english);
-			printf("\nEnter Science marks: ");
-			scanf("%f", &marks.science);
-			printf("\nEnter Social Science marks: ");
-			scanf("%f", &marks.social_science);
-			printf("\nEnter second language marks: ");
-			scanf("%f", &marks.sec_lang);
+	do{
+	scanf("%f", &marks.math);
+	if(marks.math<0 || marks.math>100)
+    {
+        printf("Please enter marks in valid range(0-100):");
+    }
+	}while(marks.math>100 || marks.math<0);
+	printf("\nEnter English marks: ");
+	do{
+	scanf("%f", &marks.english);
+	if(marks.english<0 || marks.english>100)
+    {
+        printf("Please enter marks in valid range(0-100):");
+    }
+	}while(marks.english>100 || marks.english<0);
+	printf("\nEnter Science marks: ");
+	do{
+	scanf("%f", &marks.science);
+	if(marks.science<0 || marks.science>100)
+    {
+        printf("Please enter marks in valid range(0-100):");
+    }
+	}while(marks.science>100 || marks.science<0);
+	printf("\nEnter Social Science marks: ");
+	do{
+	scanf("%f", &marks.social_science);
+	if(marks.social_science<0 || marks.social_science>100)
+    {
+        printf("Please enter marks in valid range(0-100):");
+    }
+	}while(marks.social_science>100 || marks.social_science<0);
+	printf("\nEnter second language marks: ");
+	do{
+	scanf("%f", &marks.sec_lang);
+	if(marks.sec_lang<0 || marks.sec_lang>100)
+    {
+        printf("Please enter marks in valid range(0-100):");
+    }
+	}while(marks.sec_lang>100 || marks.sec_lang<0);
 			rec1 = updateMarksheetInRecord(name, roll_num, marks, &gb1);
 			printf("\nThe updated record is:\n");
 			printRecord(&rec1);
@@ -211,9 +261,11 @@ void main()
 		case 21:
 			printRelativeGrading(&gb1);
 			break;
-		case 22:
+		case 22: printAbsGrade(&gb1);
+			break;
+		case 23:
 			system("cls");
-			system("clear");
+			//system("clear");
 			break;
 		default:
 			printf("\nEnter valid option\n");
