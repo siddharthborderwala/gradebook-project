@@ -1,5 +1,30 @@
 #include "gradebook.h"
 
+//code for center alignment of text for aesthetics and stuff
+/*#ifdef _WIN32
+#include <Windows.h>
+int GetColumnWidth()
+{
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    HANDLE out;
+
+    if (!(out = GetStdHandle(STD_OUTPUT_HANDLE)) ||
+        !GetConsoleScreenBufferInfo(out, &info))
+        return 80;
+    return info.dwSize.X;
+}//GetColumnWidth
+#else
+int GetColumnWidth() {return 80;}
+#endif
+void centre_align(char *s)
+{
+    const int total_width = GetColumnWidth();
+    const int s_width = strlen(s);
+    const int field_width = (total_width - s_width) / 2 + s_width;
+
+    printf("%*s:\n", field_width, s);
+}
+*/
 size_t record_size = sizeof(Record);
 
 // -> UTILITY FUNCTIONS
@@ -142,7 +167,7 @@ void createNewRecord(Gradebook *gb, Record new_record)
 
 Record findRecordByName(Gradebook *gb_ptr, char name[], bool should_print)
 {
-	printf("findRecordByName\n");
+	printf("Finding the record . . . .\n");
 	// if gradebook is empty
 	if (isGradeBookEmpty(gb_ptr))
 	{
@@ -161,10 +186,8 @@ Record findRecordByName(Gradebook *gb_ptr, char name[], bool should_print)
 
 	while (cur != NULL && strcmp(cur->name, name) != 0) //isStrEq(cur->name, name)
 	{
-		printf("Searching\n");
-		printf("Start Searching for %s\n", name);
-		printf("curr record name =   %s\n", cur->name);
-		printf("result of str cmp = %d\n", strcmp(cur->name, name));
+       cur->name;
+    strcmp(cur->name, name);
 		//		printRecord(cur);
 		cur = cur->next;
 	}
@@ -268,6 +291,7 @@ Record updateRollNumInRecord(char name[], rollNum new_roll_num, Gradebook *gb_pt
 	}
 
 	cur->roll_num = new_roll_num;
+	printf("\nThe updated record is:\n");
 	return (*cur);
 }
 
@@ -318,7 +342,6 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 			printf("\nLength of the search name cannot be greater than 50 characters, it will be truncated for the search");
 			name[50] = '\0';
 		}
-
 		while (cur != NULL && !strcmp(cur->name, name))//isStrEq
 			cur = cur->next;
 	}
@@ -389,7 +412,6 @@ void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
 			printf("\nLength of the search name cannot be greater than 50 characters, it will be truncated for the search");
 			name[50] = '\0';
 		}
-
 		while (cur != NULL && strcmp(cur->name, name)!=0)//isStrEq
 		{
 			prev = cur;
@@ -547,7 +569,7 @@ void sortGradebookName(Gradebook *gb_ptr, bool asc)
 		}
 	}
 
-	printf("Gradebook is sorted by name\n");
+	printf("\n\nGRADEBOOK IS SORTED BY NAME\n\n");
 }
 
 void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
@@ -614,7 +636,7 @@ void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
 		}
 	}
 
-	printf("Gradebook is sorted by roll number\n");
+	printf("\n\nGRADEBOOK IS SORTED BY ROLL NUMBER\n\n");
 }
 
 void findTopper(Gradebook *gb_ptr)
@@ -645,7 +667,7 @@ void findFailingStudents(Gradebook *gb_ptr)
 		Marksheet marks = cur->marks;
 		if (!(marks.english >= 33 && marks.math >= 33 && marks.science >= 33 && marks.sec_lang >= 33 && marks.social_science >= 33))
 		{
-			printf("\nFailed");
+			printf("\nThe records of the students currently failing in 1 or more subjects is:\n");
 			printRecord(cur);
 		}
 	}
@@ -667,5 +689,126 @@ int countGradebookRecords(Gradebook *gb_ptr)
 
 void printRelativeGrading(Gradebook *gb_ptr)
 {
+    char grade_english;
+    char grade_sec_lang;
+    char grade_math;
+    char grade_science;
+    char grade_social_science;
+    // print the relative grades of each student in the gradereport
+    Record *temp = gb_ptr->head;
+    double mean_marks[5] = {0};
+    int j = 0;
+    Marksheet marks = temp->marks;
+    while(temp!=NULL) {
+        j++;
+        mean_marks[0] += marks.english;
+        mean_marks[1] += marks.math;
+        mean_marks[2] += marks.science;
+        mean_marks[3] += marks.social_science;
+        mean_marks[4] += marks.sec_lang;
+        temp = temp->next;
+    }
+    for(int its=0;its<5;its++) {
+        mean_marks[its]/=j;
+    }
+    temp = gb_ptr->head;
+    Marksheet marks1 = temp->marks;
+    double std_marks[5] = {0};
+    while(temp!=NULL) {
+        std_marks[0] += pow((marks1.english - mean_marks[0]),2);
+        std_marks[1] += pow((marks1.math - mean_marks[1]),2);
+        std_marks[2] += pow((marks1.science - mean_marks[2]),2);
+        std_marks[3] += pow((marks1.social_science - mean_marks[3]),2);
+        std_marks[4] += pow((marks1.sec_lang - mean_marks[4]),2);
+        temp = temp->next;
+    }
+    for(int her=0;her<5;her++) {
+        std_marks[her]= sqrt(std_marks[her]/j);
+    }
+    temp = gb_ptr->head;
+    Marksheet marks2 = temp->marks;
+    while(temp!=NULL) {
+        if (marks2.english>(mean_marks[0]+(1.5*std_marks[0])))
+        grade_english='A+';
+        else if (((std_marks[0])+(mean_marks[0]))<marks2.english && ((1.5*std_marks[0])+(mean_marks[0]))>=marks2.english)
+        grade_english='A';
+        else if (((mean_marks[0]+(0.5*std_marks[0]))<=marks2.english && (std_marks[0])+(mean_marks[0]))>=marks2.english)
+        grade_english='B+';
+        else if (((mean_marks[0]))<marks2.english && ((0.5*std_marks[0])+(mean_marks[0]))>=marks2.english)
+        grade_english='B';
+        else if (((mean_marks[0])-(0.5*std_marks[0]))<=marks2.english && (((mean_marks[0]))>=marks2.english))
+        grade_english='C';
+        else if (((mean_marks[0])-(std_marks[0]))<=marks2.english && ((mean_marks[0])-(0.5*std_marks[0]))>=marks2.english)
+        grade_english='D';
+        else
+        grade_english='F';
+
+        if (marks2.math>(mean_marks[1]+(1.5*std_marks[1])))
+        grade_math='A+';
+        else if (((std_marks[1])+(mean_marks[1]))<marks2.math && ((1.5*std_marks[1])+(mean_marks[1]))>=marks2.math)
+        grade_math='A';
+        else if (((mean_marks[1]+(0.5*std_marks[1]))<=marks2.math && (std_marks[1])+(mean_marks[1]))>=marks2.math)
+        grade_math='B+';
+        else if (((mean_marks[1]))<marks2.math && ((0.5*std_marks[1])+(mean_marks[1]))>=marks2.math)
+        grade_math='B';
+        else if (((mean_marks[1])-(0.5*std_marks[1]))<=marks2.math && (((mean_marks[1]))>=marks2.math))
+        grade_math='C';
+        else if (((mean_marks[1])-(std_marks[1]))<=marks2.math && ((mean_marks[1])-(0.5*std_marks[1]))>=marks2.math)
+        grade_math='D';
+        else
+        grade_math='F';
+
+        if (marks2.science>(mean_marks[2]+(1.5*std_marks[2])))
+        grade_science='A+';
+        else if (((std_marks[2])+(mean_marks[2]))<marks2.science && ((1.5*std_marks[2])+(mean_marks[2]))>=marks2.science)
+        grade_science='A';
+        else if (((mean_marks[2]+(0.5*std_marks[2]))<=marks2.science && (std_marks[2])+(mean_marks[2]))>=marks2.science)
+        grade_science='B+';
+        else if (((mean_marks[2]))<marks2.science && ((0.5*std_marks[2])+(mean_marks[2]))>=marks2.science)
+        grade_science='B';
+        else if (((mean_marks[2])-(0.5*std_marks[2]))<=marks2.science && (((mean_marks[2]))>=marks2.science))
+        grade_science='C';
+        else if (((mean_marks[2])-(std_marks[2]))<=marks2.science && ((mean_marks[2])-(0.5*std_marks[2]))>=marks2.science)
+        grade_science='D';
+        else
+        grade_science='F';
+
+        if (marks2.social_science>(mean_marks[3]+(1.5*std_marks[3])))
+        grade_social_science='A+';
+        else if (((std_marks[3])+(mean_marks[3]))<marks2.social_science && ((1.5*std_marks[3])+(mean_marks[3]))>=marks2.social_science)
+        grade_social_science='A';
+        else if (((mean_marks[3]+(0.5*std_marks[3]))<=marks2.social_science && (std_marks[3])+(mean_marks[3]))>=marks2.social_science)
+        grade_social_science='B+';
+        else if (((mean_marks[3]))<marks2.social_science && ((0.5*std_marks[3])+(mean_marks[3]))>=marks2.social_science)
+        grade_social_science='B';
+        else if (((mean_marks[3])-(0.5*std_marks[3]))<=marks2.social_science && (((mean_marks[3]))>=marks2.social_science))
+        grade_social_science='C';
+        else if (((mean_marks[3])-(std_marks[3]))<=marks2.social_science && ((mean_marks[3])-(0.5*std_marks[3]))>=marks2.social_science)
+        grade_social_science='D';
+        else
+        grade_social_science='F';
+
+        if (marks2.sec_lang>(mean_marks[4]+(1.5*std_marks[4])))
+        grade_sec_lang='A+';
+        else if (((std_marks[4])+(mean_marks[4]))<marks2.sec_lang && ((1.5*std_marks[4])+(mean_marks[4]))>=marks2.sec_lang)
+        grade_sec_lang='A';
+        else if (((mean_marks[4]+(0.5*std_marks[4]))<=marks2.sec_lang && (std_marks[4])+(mean_marks[4]))>=marks2.sec_lang)
+        grade_sec_lang='B+';
+        else if (((mean_marks[4]))<marks2.sec_lang && ((0.5*std_marks[4])+(mean_marks[4]))>=marks2.sec_lang)
+        grade_sec_lang='B';
+        else if (((mean_marks[4])-(0.5*std_marks[4]))<=marks2.sec_lang && (((mean_marks[4]))>=marks2.sec_lang))
+        grade_sec_lang='C';
+        else if (((mean_marks[4])-(std_marks[4]))<=marks2.sec_lang && ((mean_marks[4])-(0.5*std_marks[4]))>=marks2.sec_lang)
+        grade_sec_lang='D';
+        else
+        grade_sec_lang='F';
+
+        return;
+
+
+
+
+}
+
 	// print the relative grades of each student in the gradereport
 }
