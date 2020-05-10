@@ -35,7 +35,6 @@ typedef struct record
 	Marksheet marks;
 	struct record *next;
 } Record;
-
 /*
 gradebook is a wrapper struct for the head, i.e. pointer to a particular
 linked list/gradebook
