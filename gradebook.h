@@ -194,10 +194,6 @@ return the number
 */
 int countGradebookRecords(Gradebook *);
 /*
-print the grades and marksheet of each student in the gradereport 
-*/
-void printGrades(Gradebook *);
-/*
 print the relative grades of each student in the gradereport
 */
 void printRelativeGrading(Gradebook *);
