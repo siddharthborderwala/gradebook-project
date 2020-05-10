@@ -1,2 +1,2 @@
 make:
-	gcc test.c gradebook.c --no-warnings
+	gcc test.c gradebook.c -lm --no-warnings

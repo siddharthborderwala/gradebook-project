@@ -1,24 +1,27 @@
 # Gradebook-project
+
 A gradebook, implementation of Linked List data structure.  
-This project can be used as a library.  
+This project can be used as a library.
 
 # Features
-  * Create Record
-  * Delete Record
-  * Update Record
-  * Read Record
-  * Create Gradebook
-  * Print GradeBook
-  * Delete GradeBook
-  * Search record in Gradebook by Roll number or name
-  * Update the various details of any record in the gradebook
-  * Sort the records in gradebook by roll number or name
-  * Find the topper among the students whose records are entered
-  * Count the number of records entered in the gradebook
-  * Find out the absolute grades of each student in various subjects
-  * Find out the relative grades of each student in various subjects
+
+- Create Record
+- Delete Record
+- Update Record
+- Read Record
+- Create Gradebook
+- Print GradeBook
+- Delete GradeBook
+- Search record in Gradebook by Roll number or name
+- Update the various details of any record in the gradebook
+- Sort the records in gradebook by roll number or name
+- Find the topper among the students whose records are entered
+- Count the number of records entered in the gradebook
+- Find out the absolute grades of each student in various subjects
+- Find out the relative grades of each student in various subjects
 
 # To look at the Demo
+
 ```sh
 #first make sure you're in the correct directory
 
@@ -26,7 +29,7 @@ This project can be used as a library.
 make
 
 #else use gcc
-gcc test.c gradebook.c --no-warnings
+gcc test.c gradebook.c -lm --no-warnings
 
 #run the executable
 #for unix
@@ -35,9 +38,10 @@ gcc test.c gradebook.c --no-warnings
 a.exe
 ```
 
-
 # Documentation
-### The following is a reference for the defined data-structures  
+
+### The following is a reference for the defined data-structures
+
 ```c
 /*
 rollNum data type
@@ -74,9 +78,10 @@ typedef struct Gradebook {
 	Record * head;
 	Record * tail;
 } Gradebook;
-```  
+```
 
-### The following is a reference for functions of the api  
+### The following is a reference for functions of the api
+
 ```c
 /*
 Creates a new record in an existing gradebook
@@ -224,15 +229,12 @@ bool chck_namedup(Gradebook *, char[]);
 # Areas of improvements
 
 ### Suggestions
-* Every name input should have the first letter capitalized to avoid any discrepencies.  
-* Gradebook wouldn't be saved once the user has exited the program, concept of filing might be applied to increase the usefulness of the program manyfolds.  
-* It also takes in identical records, so a function to stop duplication should be introduced.  
 
-### Additional things that can be done 
-* Finding lowest aggregate marks out of all the records in the gradebook  
-* Finding highest/lowest marks in a particular subject  
-<em>also refer to suggestions</em>
+- Every name input should have the first letter capitalized to avoid any discrepencies.
+- Gradebook wouldn't be saved once the user has exited the program, concept of filing might be applied to increase the usefulness of the program manyfolds.
 
-### Additional integrity checks that can be performed
-* Check that marks entered should not be less than zero or greater than 100.
-* String matching should be made case insensitive (strcmpi instead of strcmp)
+### Additional things that can be done
+
+- Finding lowest aggregate marks out of all the records in the gradebook
+- Finding highest/lowest marks in a particular subject  
+  <em>also refer to suggestions</em>

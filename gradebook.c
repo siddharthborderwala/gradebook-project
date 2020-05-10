@@ -1,4 +1,10 @@
 #include "gradebook.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <string.h>
+#include <stdbool.h>
+#include <math.h>
 
 //code for center alignment of text for aesthetics and stuff
 #ifdef _WIN32
@@ -873,10 +879,8 @@ bool chck_namedup(Gradebook *gb_ptr, char name[])
 	if (strlen(name) > 50)
 		name[50] = '\0';
 	Record *cur = gb_ptr->head;
-	while (cur != NULL && strcmpi(cur->name, name) != 0)
+	while (cur != NULL && strcmp(cur->name, name) != 0)
 	{
-		cur->name;
-		strcmpi(cur->name, name);
 		cur = cur->next;
 	}
 	if (cur == NULL)

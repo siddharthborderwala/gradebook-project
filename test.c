@@ -1,4 +1,5 @@
 #include "gradebook.h"
+#include <string.h>
 
 void main()
 {
@@ -94,8 +95,7 @@ void main()
 			scanf("%c", &ch);
 			printf("\nEnter name: ");
 			scanf("%[^\n]", name);
-			cnt = strcmpi(name, "Samarth Gupta");
-
+			cnt = strcmp(name, "Samarth Gupta");
 			scanf("%c", &ch);
 			findRecordByName(&gb1, name, true);
 			break;

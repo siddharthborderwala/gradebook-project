@@ -54,6 +54,6 @@
 
 ### Note
 
-- This project has been a joint effort of all the five members. It's successful execution and functioning was achieved through a collaborative effort of each member.  
-- Each and every function involved in the program was thoroughly discussed and assessed through whatsapp chat and github.  
+- This project has been a joint effort of all the five members. It's successful execution and functioning was achieved through a collaborative effort of each member.
+- Each and every function involved in the program was thoroughly discussed and assessed through whatsapp chat and github.
 - Furthermore, this project proved to be a very important learning experience as each team member got to learn something or the other from each other.
