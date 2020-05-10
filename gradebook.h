@@ -3,6 +3,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <stdbool.h>
+#include <math.h>
 
 // -> -> STRUCTURE DEFINITIONS
 
@@ -194,6 +195,11 @@ return the number
 */
 int countGradebookRecords(Gradebook *);
 /*
-print the relative grades of each student in the gradereport
+print the absolute grades of each student in the gradereport
+*/
+
+void printAbsGrade(Gradebook *);
+/*
+print the relative grades of each student in the gradereport when class size is greater than 30
 */
 void printRelativeGrading(Gradebook *);
