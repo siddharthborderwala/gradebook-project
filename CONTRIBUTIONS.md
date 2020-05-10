@@ -30,6 +30,8 @@
   - Created core functions, sorting functions, absolute grading functions, menu driven main
   - Debugging of core functions
   - Ideation of additional functionality
+  - Wrote the core functions
+    -  printAbsGrade, sortGradebookName (both ascending and decending), sortGradebookRollNum (both ascending and decending), defdata, deleteRecordHead
 
 [Siddharth Borderwala](https://github.com/siddharthborderwala)
 
