@@ -31,7 +31,7 @@
 - Contributions
   - Created core functions, sorting functions, absolute grading functions, menu driven main
   - Debugging of core functions 
-  -Ideation of additional functionality
+  - Ideation of additional functionality
 
 [Yash Varshney](https://github.com/HelBlazer)
 
