@@ -1,7 +1,8 @@
-# gradebook-project
-A gradebook, implementation of Linked List data structure
+# Gradebook-project
+A gradebook, implementation of Linked List data structure.  
+This project can be used as a library.  
 
-# features
+# Features
   * Create Record
   * Delete Record
   * Update Record
@@ -9,29 +10,32 @@ A gradebook, implementation of Linked List data structure
   * Create Gradebook
   * Print GradeBook
   * Delete GradeBook
+  * Search record in Gradebook by Roll number or name
+  * Update the various details of any record in the gradebook
+  * Sort the records in gradebook by roll number or name
+  * Find the topper among the students whose records are entered
+  * Count the number of records entered in the gradebook
+  * Find out the relative grades of each student in various subjects
 
-# suggestions
+# To look at the Demo
+```sh
+#first make sure you're in the correct directory
 
-# These are added in menu and have corresponding empty functions in the gradebook.c file
+#if your OS supports make command
+make
 
-Sorting records in gradebook by name ascending/descending
-Sorting records in gradebook by roll number ascending/descending
-Creating a text file containing all test cases and running them on the program to see if they are working- this can be added to readme later
-Finding highest aggregate marks out of all the records in the gradebook
-Count the number of records in the gradebook
-Generate grade report of a student where each student is assigned a particular grade on the basis of marks.
-Generate a grade report based on relative grading system
+#else use gcc
+gcc test.c gradebook.c --no-warnings
 
-# Additional things to do
-These are not included in menu and also there is no empty function created for them in gradebook.c
-Finding lowest aggregate marks out of all the records in the gradebook
-Finding highest/lowest marks in a particular subject
+#run the executable
+#for unix
+./a.out
+#for windows
+a.exe
+```
 
-# Additional integrity checks that can be performed
-Check that marks entered should not be less than zero or greater than 100.
-String matching should be made case insensitive (strcmpi instead of strcmp)
 
-# docs
+# Documentation
 ### The following is a reference for the defined data-structures  
 ```c
 /*
@@ -142,13 +146,61 @@ Takes in a Pointer to Gradebook
 Returns void
 */
 void printGradebook(Gradebook *);
+
+/*
+sorts the records in gradebook in ascending or descending order of name
+*/
+void sortGradebookName(Gradebook *, bool);
+
+/*
+sorts the records in gradebook in ascending or descending order of roll num
+*/
+void sortGradebookRollNum(Gradebook *, bool);
+
+/*
+Find the student with max total marks
+print this record
+*/
+void findTopper(Gradebook *);
+
+/*
+find the records of students who fail in 1 or more subjects
+print these records
+*/
+void findFailingStudents(Gradebook *);
+
+/*
+count the number of records in the gradebook
+return the number
+*/
+int countGradebookRecords(Gradebook *);
+
+/*
+print the grades and marksheet of each student in the gradereport
+*/
+void printGrades(Gradebook *);
+
+/*
+print the relative grades of each student in the gradereport
+*/
+void printRelativeGrading(Gradebook *);
+
+/* prints the text in argument in centre_aligned*/
+void centre_align(char *s);
 ```
 
+# Areas of improvements
 
-# contributors
-[Siddharth Borderwala](https://github.com/siddharthborderwala)  
-[Niramay Kachhadiya](https://github.com/niramay447)  
-[Aarjav Desai](https://github.com/Aarjav-D)  
-[Samarth Gupta](https://github.com/sgupta2501)  
-[Yash Varshney](https://github.com/HelBlazer)  
+### Suggestions
+* Every name input should have the first letter capitalized to avoid any discrepencies.  
+* Gradebook wouldn't be saved once the user has exited the program, concept of filing might be applied to increase the usefulness of the program manyfolds.  
+* It also takes in identical records, so a function to stop duplication should be introduced.  
 
+### Additional things that can be done 
+* Finding lowest aggregate marks out of all the records in the gradebook  
+* Finding highest/lowest marks in a particular subject  
+<em>also refer to suggestions</em>
+
+### Additional integrity checks that can be performed
+* Check that marks entered should not be less than zero or greater than 100.
+* String matching should be made case insensitive (strcmpi instead of strcmp)
