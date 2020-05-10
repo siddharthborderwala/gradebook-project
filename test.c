@@ -34,8 +34,8 @@ void main()
 		printf("18.Find the students who have failed in one or more subjects \n");	
 		printf("19.Print gradebook\n");
 		printf("20.Count and Print number of students in gradebook\n");		
-		printf("21.Print gradereport (over all grade and marksheet) for all the students \n");		
-		printf("22.Print relative grading for all the students \n");					
+		printf("21.Print relative grading for all the students \n");
+		printf("22.Print absolute grading for all the students \n");
 		printf("23.Clear screen\n");
 		printf("\nEnter a menu choice: ");
 		scanf("%d", &menu);
@@ -150,51 +150,26 @@ void main()
 			case 16: //sort descending
 			sortGradebookRollNum(&gb1,false);
 				break;
-			case 17: 
-			//findTopper(&gb1);
-				break;
-			case 18: 
-			//findFailingStudents(&gb1);
-				break;
+			case 17:
+			printf("The record details of the topper are:");
+			findTopper(&gb1);
+			break;
+			case 18:
+			findFailingStudents(&gb1);
+			break;
 			case 19: printGradebook(&gb1);
 				break;
 			case 20: cnt=countGradebookRecords(&gb1);
 				printf("\nNumber of records in the gradebook = %d",cnt);
+				break;					
+			case 21: printRelativeGrading(&gb1);
 				break;			
-			case 21: printGrades(&gb1);
-				break;			
-			case 22: printRelativeGrading(&gb1);
-				break;			
-			case 23: 		system("clear");
+			case 22: printAbsGrade(&gb1);
+				break;
+			case 23: system("clear");
 				break;						
 			default: printf("\nEnter valid option\n");
 				break;
 		}	
 	}
-	//printGradebook(&gb1);	//done 
-
-//	findRecordByName(&gb1, "Siddharth Borderwala", true);	//done  
-	
-	//printGradebook(&gb1);//added
-	
-//	deleteRecord("Siddharth Borderwala",0, &gb1);	//done 
-	
-//	updateNameInRecord("Dev Patel", 1910110120, &gb1);	//done
-
-//	updateRollNumInRecord("Samarth Gupta", 1910110338, &gb1);	//done
-
-
-//	updateMarksheetInRecord("", 0, (Marksheet) {
-//		0,97.5,99.0,97.2,98.6
-//	}, &gb1);	//done
-//	printGradebook(&gb1);
-
-//	findRecordByRollNum(&gb1, (rollNum) 1910110285, true);	//done
-//	findRecordByName(&gb1, "Dev Patel", true);	//done
-
-//	printGradebook(&gb1);	//done
-
-//	deleteRecordHead(&gb1);	
-//	deleteGradebook(&gb1);
-//	printGradebook(&gb1);
 }
