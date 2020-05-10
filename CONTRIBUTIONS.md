@@ -29,8 +29,9 @@
 - 1910110338
 - sg384
 - Contributions
-  - Created core functions and sorting functions
-  - Debugging of core functions
+  - Created core functions, sorting functions, absolute grading functions, menu driven main
+  - Debugging of core functions 
+  -Ideation of additional functionality
 
 [Yash Varshney](https://github.com/HelBlazer)
 
@@ -39,3 +40,4 @@
 - Contributions
   - Created the some core functions and debuggin in Code Blocks
   - Worked on README.md
+This project is a joint effort of all the five members. It was achieved through a collaborative effort of each member.
