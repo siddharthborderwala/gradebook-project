@@ -515,7 +515,7 @@ void sortGradebookName(Gradebook *gb_ptr, bool asc)
 			j = i->next;
 			while (j != NULL)
 			{
-				if (strcmp(i->name, j->name) > 0)
+				if (strcmpi(i->name, j->name) > 0)
 				{
 					k.roll_num = i->roll_num;
 					i->roll_num = j->roll_num;
@@ -540,7 +540,7 @@ void sortGradebookName(Gradebook *gb_ptr, bool asc)
 			j = i->next;
 			while (j != NULL)
 			{
-				if (strcmp(i->name, j->name) < 0)
+				if (strcmpi(i->name, j->name) < 0)
 				{
 					k.roll_num = i->roll_num;
 					i->roll_num = j->roll_num;
