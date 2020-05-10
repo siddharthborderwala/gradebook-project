@@ -111,15 +111,45 @@ void main()
 			roll_num = 0;
 			printf("\nEnter new marksheet details:\n");
 			printf("\nEnter Maths marks: ");
-			scanf("%f", &marks.math);
-			printf("\nEnter English marks: ");
-			scanf("%f", &marks.english);
-			printf("\nEnter Science marks: ");
-			scanf("%f", &marks.science);
-			printf("\nEnter Social Science marks: ");
-			scanf("%f", &marks.social_science);
-			printf("\nEnter second language marks: ");
-			scanf("%f", &marks.sec_lang);
+	do{
+	scanf("%f", &marks.math);
+	if(marks.math<0 || marks.math>100)
+    {
+        printf("enter marks in valid range(0-100)");
+    }
+	}while(marks.math>100 || marks.math<0);
+	printf("\nEnter English marks: ");
+	do{
+	scanf("%f", &marks.english);
+	if(marks.english<0 || marks.english>100)
+    {
+        printf("enter marks in valid range(0-100)");
+    }
+	}while(marks.english>100 || marks.english<0);
+	printf("\nEnter Science marks: ");
+	do{
+	scanf("%f", &marks.science);
+	if(marks.science<0 || marks.science>100)
+    {
+        printf("enter marks in valid range(0-100)");
+    }
+	}while(marks.science>100 || marks.science<0);
+	printf("\nEnter Social Science marks: ");
+	do{
+	scanf("%f", &marks.social_science);
+	if(marks.social_science<0 || marks.social_science>100)
+    {
+        printf("enter marks in valid range(0-100)");
+    }
+	}while(marks.social_science>100 || marks.social_science<0);
+	printf("\nEnter second language marks: ");
+	do{
+	scanf("%f", &marks.sec_lang);
+	if(marks.sec_lang<0 || marks.sec_lang>100)
+    {
+        printf("enter marks in valid range(0-100)");
+    }
+	}while(marks.sec_lang>100 || marks.sec_lang<0);
 			rec1 = updateMarksheetInRecord(name, roll_num, marks, &gb1);
 			printf("\nThe updated record is:\n");
 			printRecord(&rec1);
