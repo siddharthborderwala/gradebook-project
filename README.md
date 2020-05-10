@@ -79,10 +79,26 @@ typedef struct Gradebook {
 ### The following is a reference for functions of the api  
 ```c
 /*
+Creates a new record in an existing gradebook
+Takes the input from the user for record data,
+that is, name, roll number, marksheet
+Creates the gradebook, if not alreday created.
+*/
+
+void addRecord(Gradebook *);
+
+/*
 Initializes a new Gradebook Object
+Takes in nothing
+*/
+void defdata(Gradebook *);
+
+/*
+Creates a new empty Gradebook Object
 Takes in nothing
 Returns Gradebook
 */
+
 Gradebook createGradeBook();
 
 /*
@@ -90,12 +106,11 @@ Creates a new record in an existing gradebook
 Takes in a Pointer to Gradebook and a Record Object
 Returns the newly created Record
 */
-Record createNewRecord(Gradebook *, Record);
+void createNewRecord(Gradebook *, Record);
 
 /*
 Finds the record by a search name if found returns and prints it if third argument is true
 Takes in a Pointer to Gradebook and a Name
-Returns the record if found
 */
 Record findRecordByName(Gradebook *, char[], bool);
 
@@ -132,7 +147,14 @@ Deletes a record in a gradebook
 Takes in either a search name or a search roll number and a pointer to gradebook
 Returns void
 */
-void deleteRecord(char [], rollNum , Gradebook *);
+void deleteRecord(char[], rollNum, Gradebook *);
+
+/*
+Deletes the record at the head of the gradebook
+Takes in a pointer to gradebook
+Returns void
+*/
+void deleteRecordHead(Gradebook *gb_ptr);
 
 /*
 Deletes a gradebook
@@ -147,47 +169,56 @@ Takes in a Pointer to Gradebook
 Returns void
 */
 void printGradebook(Gradebook *);
-
 /*
 sorts the records in gradebook in ascending or descending order of name
 */
 void sortGradebookName(Gradebook *, bool);
-
 /*
 sorts the records in gradebook in ascending or descending order of roll num
 */
 void sortGradebookRollNum(Gradebook *, bool);
-
 /*
 Find the student with max total marks
 print this record
 */
 void findTopper(Gradebook *);
-
 /*
 find the records of students who fail in 1 or more subjects
 print these records
 */
 void findFailingStudents(Gradebook *);
-
 /*
 count the number of records in the gradebook
 return the number
 */
 int countGradebookRecords(Gradebook *);
-
 /*
-print the grades and marksheet of each student in the gradereport
+print the absolute grades of each student in the gradereport
 */
-void printGrades(Gradebook *);
+void printAbsGrade(Gradebook *);
+/*
+finds the relative grades by taking three inputs
+marks of the individual in the subject, mean_marks and std_marks of the class
+returns a string (grade)
+*/
+char *generateRelativeGrade(double, double, double);
 
 /*
-print the relative grades of each student in the gradereport
+print the relative grades of each student in the gradereport when class size is greater than 30
 */
 void printRelativeGrading(Gradebook *);
 
-/* prints the text in argument in centre_aligned*/
-void centre_align(char *s);
+/*
+checks for roll number duplication
+return bool true if duplicate is found
+*/
+bool chck_rolldup(Gradebook *, rollNum);
+
+/*
+checks for name duplication
+return bool true if duplicate is found
+*/
+bool chck_namedup(Gradebook *, char[]);
 ```
 
 # Areas of improvements

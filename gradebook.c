@@ -1,4 +1,3 @@
-
 #include "gradebook.h"
 
 //code for center alignment of text for aesthetics and stuff
@@ -77,56 +76,62 @@ void addRecord(Gradebook *gb1)
 	scanf("%lld", &roll_num);
 	printf("Enter marksheet details:\n");
 	printf("\nEnter Maths marks: ");
-	do{
-	scanf("%f", &marks.math);
-	if(marks.math<0 || marks.math>100)
-    {
-        printf("Please enter marks in valid range(0-100):");
-    }
-	}while(marks.math>100 || marks.math<0);
+	do
+	{
+		scanf("%f", &marks.math);
+		if (marks.math < 0 || marks.math > 100)
+		{
+			printf("Please enter marks in valid range(0-100):");
+		}
+	} while (marks.math > 100 || marks.math < 0);
 	printf("\nEnter English marks: ");
-	do{
-	scanf("%f", &marks.english);
-	if(marks.english<0 || marks.english>100)
-    {
-        printf("Please enter marks in valid range(0-100):");
-    }
-	}while(marks.english>100 || marks.english<0);
+	do
+	{
+		scanf("%f", &marks.english);
+		if (marks.english < 0 || marks.english > 100)
+		{
+			printf("Please enter marks in valid range(0-100):");
+		}
+	} while (marks.english > 100 || marks.english < 0);
 	printf("\nEnter Science marks: ");
-	do{
-	scanf("%f", &marks.science);
-	if(marks.science<0 || marks.science>100)
-    {
-        printf("Please enter marks in valid range(0-100):");
-    }
-	}while(marks.science>100 || marks.science<0);
+	do
+	{
+		scanf("%f", &marks.science);
+		if (marks.science < 0 || marks.science > 100)
+		{
+			printf("Please enter marks in valid range(0-100):");
+		}
+	} while (marks.science > 100 || marks.science < 0);
 	printf("\nEnter Social Science marks: ");
-	do{
-	scanf("%f", &marks.social_science);
-	if(marks.social_science<0 || marks.social_science>100)
-    {
-        printf("Please enter marks in valid range(0-100):");
-    }
-	}while(marks.social_science>100 || marks.social_science<0);
+	do
+	{
+		scanf("%f", &marks.social_science);
+		if (marks.social_science < 0 || marks.social_science > 100)
+		{
+			printf("Please enter marks in valid range(0-100):");
+		}
+	} while (marks.social_science > 100 || marks.social_science < 0);
 	printf("\nEnter second language marks: ");
-	do{
-	scanf("%f", &marks.sec_lang);
-	if(marks.sec_lang<0 || marks.sec_lang>100)
-    {
-        printf("Please enter marks in valid range(0-100):");
-    }
-	}while(marks.sec_lang>100 || marks.sec_lang<0);
+	do
+	{
+		scanf("%f", &marks.sec_lang);
+		if (marks.sec_lang < 0 || marks.sec_lang > 100)
+		{
+			printf("Please enter marks in valid range(0-100):");
+		}
+	} while (marks.sec_lang > 100 || marks.sec_lang < 0);
 
 	strcpy(rec.name, name);
 	rec.roll_num = roll_num;
-	if((chck_namedup(gb1,name)==1)&&(chck_rolldup(gb1,roll_num)==1))
-    {printf("\nData for this student is already present. Data not added!\nPlease use options 9-11 for updation\n");
-    return;
-    }
-	if((chck_namedup(gb1,name)==0)&&(chck_rolldup(gb1,roll_num)==1))
+	if ((chck_namedup(gb1, name) == 1) && (chck_rolldup(gb1, roll_num) == 1))
 	{
-	    printf("\nDifferent name for same roll number. KINDLY RECHECK!\n");
-	    return;
+		printf("\nData for this student is already present. Data not added!\nPlease use options 9-11 for updation\n");
+		return;
+	}
+	if ((chck_namedup(gb1, name) == 0) && (chck_rolldup(gb1, roll_num) == 1))
+	{
+		printf("\nDifferent name for same roll number. KINDLY RECHECK!\n");
+		return;
 	}
 	rec.marks = marks;
 	createNewRecord(gb1, rec);
@@ -688,47 +693,82 @@ void printAbsGrade(Gradebook *gb_ptr)
 	temp = gb_ptr->head;
 	while (temp != NULL)
 	{
-		printf("Abs grading roll no = %lld\n",temp->roll_num);
+		printf("Abs grading roll no = %lld\n", temp->roll_num);
 		marks_individual = temp->marks;
-		if (marks_individual.math>90) grade_math = "A+";
-		else if (marks_individual.math>80) grade_math = "A";
-		else if (marks_individual.math>70) grade_math = "B+";
-		else if (marks_individual.math>60) grade_math = "B";
-		else if (marks_individual.math>50) grade_math = "C";
-		else if (marks_individual.math>40) grade_math = "D";
-		else grade_math = "F";
+		if (marks_individual.math > 90)
+			grade_math = "A+";
+		else if (marks_individual.math > 80)
+			grade_math = "A";
+		else if (marks_individual.math > 70)
+			grade_math = "B+";
+		else if (marks_individual.math > 60)
+			grade_math = "B";
+		else if (marks_individual.math > 50)
+			grade_math = "C";
+		else if (marks_individual.math > 40)
+			grade_math = "D";
+		else
+			grade_math = "F";
 
-		if (marks_individual.english>90) grade_english = "A+";
-		else if (marks_individual.english>80) grade_english = "A";
-		else if (marks_individual.english>70) grade_english = "B+";
-		else if (marks_individual.english>60) grade_english = "B";
-		else if (marks_individual.english>50) grade_english = "C";
-		else if (marks_individual.english>40) grade_english = "D";
-		else grade_english = "F";
+		if (marks_individual.english > 90)
+			grade_english = "A+";
+		else if (marks_individual.english > 80)
+			grade_english = "A";
+		else if (marks_individual.english > 70)
+			grade_english = "B+";
+		else if (marks_individual.english > 60)
+			grade_english = "B";
+		else if (marks_individual.english > 50)
+			grade_english = "C";
+		else if (marks_individual.english > 40)
+			grade_english = "D";
+		else
+			grade_english = "F";
 
-		if (marks_individual.science>90) grade_science = "A+";
-		else if (marks_individual.science>80) grade_science = "A";
-		else if (marks_individual.science>70) grade_science = "B+";
-		else if (marks_individual.science>60) grade_science = "B";
-		else if (marks_individual.science>50) grade_science = "C";
-		else if (marks_individual.science>40) grade_science = "D";
-		else grade_science = "F";
+		if (marks_individual.science > 90)
+			grade_science = "A+";
+		else if (marks_individual.science > 80)
+			grade_science = "A";
+		else if (marks_individual.science > 70)
+			grade_science = "B+";
+		else if (marks_individual.science > 60)
+			grade_science = "B";
+		else if (marks_individual.science > 50)
+			grade_science = "C";
+		else if (marks_individual.science > 40)
+			grade_science = "D";
+		else
+			grade_science = "F";
 
-		if (marks_individual.social_science>90) grade_social_science = "A+";
-		else if (marks_individual.social_science>80) grade_social_science = "A";
-		else if (marks_individual.social_science>70) grade_social_science = "B+";
-		else if (marks_individual.social_science>60) grade_social_science = "B";
-		else if (marks_individual.social_science>50) grade_social_science = "C";
-		else if (marks_individual.social_science>40) grade_social_science = "D";
-		else grade_social_science = "F";
+		if (marks_individual.social_science > 90)
+			grade_social_science = "A+";
+		else if (marks_individual.social_science > 80)
+			grade_social_science = "A";
+		else if (marks_individual.social_science > 70)
+			grade_social_science = "B+";
+		else if (marks_individual.social_science > 60)
+			grade_social_science = "B";
+		else if (marks_individual.social_science > 50)
+			grade_social_science = "C";
+		else if (marks_individual.social_science > 40)
+			grade_social_science = "D";
+		else
+			grade_social_science = "F";
 
-		if (marks_individual.sec_lang>90) grade_sec_lang = "A+";
-		else if (marks_individual.sec_lang>80) grade_sec_lang = "A";
-		else if (marks_individual.sec_lang>70) grade_sec_lang = "B+";
-		else if (marks_individual.sec_lang>60) grade_sec_lang = "B";
-		else if (marks_individual.sec_lang>50) grade_sec_lang = "C";
-		else if (marks_individual.sec_lang>40) grade_sec_lang = "D";
-		else grade_sec_lang = "F";
+		if (marks_individual.sec_lang > 90)
+			grade_sec_lang = "A+";
+		else if (marks_individual.sec_lang > 80)
+			grade_sec_lang = "A";
+		else if (marks_individual.sec_lang > 70)
+			grade_sec_lang = "B+";
+		else if (marks_individual.sec_lang > 60)
+			grade_sec_lang = "B";
+		else if (marks_individual.sec_lang > 50)
+			grade_sec_lang = "C";
+		else if (marks_individual.sec_lang > 40)
+			grade_sec_lang = "D";
+		else
+			grade_sec_lang = "F";
 
 		printf("\nAbsolute Grades for %s - %lld are\n", temp->name, temp->roll_num);
 		printf("\n\tMaths:              %s", grade_english);
@@ -763,11 +803,11 @@ void printRelativeGrading(Gradebook *gb_ptr)
 		mean_marks[4] += marks.sec_lang;
 		temp = temp->next;
 	}
-	if(j<=30)
+	if (j <= 30)
 	{
 		printf("Relative grading is possible for class size greater than 30\n");
-		printf("Current class size =%d. Printing absolute grading\n",j);
-		printAbsGrade(gb_ptr	);
+		printf("Current class size =%d. Printing absolute grading\n", j);
+		printAbsGrade(gb_ptr);
 		return;
 	}
 	for (int its = 0; its < 5; its++)
@@ -813,32 +853,34 @@ void printRelativeGrading(Gradebook *gb_ptr)
 	}
 }
 
-int chck_rolldup(Gradebook * gb_ptr, rollNum roll_num) {
-  if (isGradeBookEmpty(gb_ptr))
-    return 0;
-  Record * cur = gb_ptr -> head;
-  while (cur != NULL && cur -> roll_num != roll_num)
-    cur = cur -> next;
-  if (cur == NULL)
-    return 0;
-  else
-    return 1;
+bool chck_rolldup(Gradebook *gb_ptr, rollNum roll_num)
+{
+	if (isGradeBookEmpty(gb_ptr))
+		return false;
+	Record *cur = gb_ptr->head;
+	while (cur != NULL && cur->roll_num != roll_num)
+		cur = cur->next;
+	if (cur == NULL)
+		return false;
+	else
+		return true;
 }
 
-int chck_namedup(Gradebook * gb_ptr, char name[]) {
-  if (isGradeBookEmpty(gb_ptr))
-    return 0;
-  if (strlen(name) > 50)
-    name[50] = '\0';
-  Record * cur = gb_ptr -> head;
-  while (cur != NULL && strcmpi(cur -> name, name) != 0) {
-    cur -> name;
-    strcmpi(cur -> name, name);
-    cur = cur -> next;
-  }
-  if (cur == NULL)
-    return 0;
-  else
-
-    return 1;
+bool chck_namedup(Gradebook *gb_ptr, char name[])
+{
+	if (isGradeBookEmpty(gb_ptr))
+		return false;
+	if (strlen(name) > 50)
+		name[50] = '\0';
+	Record *cur = gb_ptr->head;
+	while (cur != NULL && strcmpi(cur->name, name) != 0)
+	{
+		cur->name;
+		strcmpi(cur->name, name);
+		cur = cur->next;
+	}
+	if (cur == NULL)
+		return false;
+	else
+		return true;
 }

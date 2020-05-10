@@ -78,6 +78,12 @@ Returns int
 */
 int isGradeBookEmpty(Gradebook *);
 
+/*
+For aesthetic purposes
+*/
+int GetColumnWidth();
+void centre_align(char *);
+
 // -> core functions
 
 /*
@@ -197,9 +203,27 @@ int countGradebookRecords(Gradebook *);
 /*
 print the absolute grades of each student in the gradereport
 */
-
 void printAbsGrade(Gradebook *);
+/*
+finds the relative grades by taking three inputs
+marks of the individual in the subject, mean_marks and std_marks of the class
+returns a string (grade)
+*/
+char *generateRelativeGrade(double, double, double);
+
 /*
 print the relative grades of each student in the gradereport when class size is greater than 30
 */
 void printRelativeGrading(Gradebook *);
+
+/*
+checks for roll number duplication
+return bool true if duplicate is found
+*/
+bool chck_rolldup(Gradebook *, rollNum);
+
+/*
+checks for name duplication
+return bool true if duplicate is found
+*/
+bool chck_namedup(Gradebook *, char[]);
