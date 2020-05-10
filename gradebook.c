@@ -36,7 +36,6 @@ int isGradeBookEmpty(Gradebook *gb_ptr)
 	else
 		return 0;
 }
-
 void addRecord(Gradebook *gb1)
 {
 	char name[50], ch;
@@ -51,21 +50,52 @@ void addRecord(Gradebook *gb1)
 	scanf("%lld", &roll_num);
 	printf("Enter marksheet details:\n");
 	printf("\nEnter Maths marks: ");
+	do{
 	scanf("%f", &marks.math);
+	if(marks.math<0 || marks.math>100)
+    {
+        printf("enter marks in valid range(0-100)");
+    }
+	}while(marks.math>100 || marks.math<0);
 	printf("\nEnter English marks: ");
+	do{
 	scanf("%f", &marks.english);
+	if(marks.english<0 || marks.english>100)
+    {
+        printf("enter marks in valid range(0-100)");
+    }
+	}while(marks.english>100 || marks.english<0);
 	printf("\nEnter Science marks: ");
+	do{
 	scanf("%f", &marks.science);
+	if(marks.science<0 || marks.science>100)
+    {
+        printf("enter marks in valid range(0-100)");
+    }
+	}while(marks.science>100 || marks.science<0);
 	printf("\nEnter Social Science marks: ");
+	do{
 	scanf("%f", &marks.social_science);
+	if(marks.social_science<0 || marks.social_science>100)
+    {
+        printf("enter marks in valid range(0-100)");
+    }
+	}while(marks.social_science>100 || marks.social_science<0);
 	printf("\nEnter second language marks: ");
+	do{
 	scanf("%f", &marks.sec_lang);
-
+	if(marks.sec_lang<0 || marks.sec_lang>100)
+    {
+        printf("enter marks in valid range(0-100)");
+    }
+	}while(marks.sec_lang>100 || marks.sec_lang<0);
+	
 	strcpy(rec.name, name);
 	rec.roll_num = roll_num;
 	rec.marks = marks;
 	createNewRecord(gb1, rec);
 }
+
 
 // -> CORE FUNCTIONS
 void defdata(Gradebook *gb1)
