@@ -34,9 +34,8 @@ void main()
 		printf("18.Find the students who have failed in one or more subjects \n");
 		printf("19.Print gradebook\n");
 		printf("20.Count and Print number of students in gradebook\n");
-		printf("21.Print gradereport (over all grade and marksheet) for all the students \n");
-		printf("22.Print relative grading for all the students \n");
-		printf("23.Clear screen\n");
+		printf("21.Print relative grading for all the students \n");
+		printf("22.Clear screen\n");
 		printf("\nEnter a menu choice: ");
 		scanf("%d", &menu);
 		switch (menu)
@@ -55,9 +54,8 @@ void main()
 			deleteRecordHead(&gb1);
 			break;
 		case 4:
-			scanf("%c", &ch); // temp statement to clear buffer
+			scanf("%c", &ch);
 			printf("\nEnter name: ");
-			//			fgets(name, 50, stdin);  // read name string
 			scanf("%[^\n]", name);
 			roll_num = 0;
 			deleteRecord(name, roll_num, &gb1);
@@ -66,45 +64,39 @@ void main()
 			scanf("%c", &ch);
 			printf("\nEnter roll number:  ");
 			scanf("%lld", &roll_num);
-			//			printf("roll no is %lld\n", roll_num);
 			strcpy(name, "");
 			deleteRecord(name, roll_num, &gb1);
 			break;
 		case 6:
 			deleteGradebook(&gb1);
 			break;
-		case 7:							//printf("I m here\n");
-			scanf("%c", &ch); // temp statement to clear buffer
+		case 7:
+			scanf("%c", &ch);
 			printf("\nEnter name: ");
-			//			scanf("%c",&ch); // temp statement to clear buffer
-			//fgets(name, 50, stdin);  // read name string
 			scanf("%[^\n]", name);
 			cnt = strcmp(name, "Samarth Gupta");
 
 			scanf("%c", &ch);
-			findRecordByName(&gb1, name, true); //true for printing the found record
+			findRecordByName(&gb1, name, true);
 			break;
 		case 8:
-			scanf("%c", &ch); // temp statement to clear buffer
+			scanf("%c", &ch);
 			printf("\nEnter roll number:  ");
 			scanf("%lld", &roll_num);
-			findRecordByRollNum(&gb1, roll_num, true); //true for printing the found record
+			findRecordByRollNum(&gb1, roll_num, true);
 			break;
 		case 9:
 			printf("\nEnter roll number:  ");
 			scanf("%lld", &roll_num);
-			scanf("%c", &ch); // temp statement to clear buffer
+			scanf("%c", &ch);
 			printf("\nEnter name: ");
-			//			fgets(name, 50, stdin);  // read name string
 			scanf("%[^\n]", name);
 			rec1 = updateNameInRecord(name, roll_num, &gb1);
 			printRecord(&rec1);
 			break;
 		case 10:
-			scanf("%c", &ch); // temp statement to clear buffer
+			scanf("%c", &ch);
 			printf("\nEnter name: ");
-			//			fgets(name, 50, stdin);  // read name string
-			//			scanf("%c",&ch); // temp statement to clear buffer
 			scanf("%[^\n]", name);
 			printf("\nEnter roll number:  ");
 			scanf("%lld", &roll_num);
@@ -112,9 +104,8 @@ void main()
 			printRecord(&rec1);
 			break;
 		case 11:
-			scanf("%c", &ch); // temp statement to clear buffer
+			scanf("%c", &ch);
 			printf("\nEnter name: ");
-			//			fgets(name, 50, stdin);  // read name string
 			scanf("%[^\n]", name);
 			rec1 = updateNameInRecord(name, roll_num, &gb1);
 			roll_num = 0;
@@ -134,7 +125,7 @@ void main()
 			printRecord(&rec1);
 			break;
 		case 12:
-			scanf("%c", &ch); // temp statement to clear bufferprintf("\nEnter roll number:  ");
+			scanf("%c", &ch);printf("\nEnter roll number:  ");
 			printf("\nEnter roll number:  ");
 			scanf("%lld", &roll_num);
 			strcpy(name, "");
@@ -178,7 +169,7 @@ void main()
 			findTopper(&gb1);
 			break;
 		case 18:
-			findFailingStudents(&gb1); //not working
+			findFailingStudents(&gb1);
 			break;
 		case 19:
 			printGradebook(&gb1);
@@ -188,13 +179,11 @@ void main()
 			printf("\nNumber of records in the gradebook = %d", cnt);
 			break;
 		case 21:
-			printGradebook(&gb1);
-			break;
-		case 22:
 			printRelativeGrading(&gb1);
 			break;
-		case 23:
-			system("cls"); //'clear' may not work in some systems
+		case 22:
+			system("cls");
+			system("clear");
 			break;
 		default:
 			printf("\nEnter valid option\n");
