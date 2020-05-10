@@ -663,7 +663,161 @@ int countGradebookRecords(Gradebook *gb_ptr)
 	return count;
 }
 
+char *generateRelativeGrade(double subj_marks, double mean_marks, double std_marks)
+{
+	char *grade;
+	if (subj_marks > (mean_marks + (1.5 * std_marks)))
+		grade = "A+";
+	else if (((std_marks) + (mean_marks)) < subj_marks && ((1.5 * std_marks) + (mean_marks)) >= subj_marks)
+		grade = "A";
+	else if (((mean_marks + (0.5 * std_marks)) <= subj_marks && (std_marks) + (mean_marks)) >= subj_marks)
+		grade = "B+";
+	else if (((mean_marks)) < subj_marks && ((0.5 * std_marks) + (mean_marks)) >= subj_marks)
+		grade = "B";
+	else if (((mean_marks) - (0.5 * std_marks)) <= subj_marks && (((mean_marks)) >= subj_marks))
+		grade = "C";
+	else if (((mean_marks) - (std_marks)) <= subj_marks && ((mean_marks) - (0.5 * std_marks)) >= subj_marks)
+		grade = "D";
+	else
+		grade = "F";
+
+	return grade;
+}
+
+void printAbsGrade(Gradebook *gb_ptr)
+{
+	Record *temp = gb_ptr->head;
+	char *grade_english;
+	char *grade_sec_lang;
+	char *grade_math;
+	char *grade_science;
+	char *grade_social_science;
+	Marksheet marks_individual;
+
+	temp = gb_ptr->head;
+	while (temp != NULL)
+	{
+		printf("Abs grading roll no = %lld\n",temp->roll_num);
+		marks_individual = temp->marks;
+		if (marks_individual.math>90) grade_math = "A+";
+		else if (marks_individual.math>80) grade_math = "A";
+		else if (marks_individual.math>70) grade_math = "B+";
+		else if (marks_individual.math>60) grade_math = "B";
+		else if (marks_individual.math>50) grade_math = "C";
+		else if (marks_individual.math>40) grade_math = "D";
+		else grade_math = "F";
+
+		if (marks_individual.english>90) grade_english = "A+";
+		else if (marks_individual.english>80) grade_english = "A";
+		else if (marks_individual.english>70) grade_english = "B+";
+		else if (marks_individual.english>60) grade_english = "B";
+		else if (marks_individual.english>50) grade_english = "C";
+		else if (marks_individual.english>40) grade_english = "D";
+		else grade_english = "F";
+
+		if (marks_individual.science>90) grade_science = "A+";
+		else if (marks_individual.science>80) grade_science = "A";
+		else if (marks_individual.science>70) grade_science = "B+";
+		else if (marks_individual.science>60) grade_science = "B";
+		else if (marks_individual.science>50) grade_science = "C";
+		else if (marks_individual.science>40) grade_science = "D";
+		else grade_science = "F";
+
+		if (marks_individual.social_science>90) grade_social_science = "A+";
+		else if (marks_individual.social_science>80) grade_social_science = "A";
+		else if (marks_individual.social_science>70) grade_social_science = "B+";
+		else if (marks_individual.social_science>60) grade_social_science = "B";
+		else if (marks_individual.social_science>50) grade_social_science = "C";
+		else if (marks_individual.social_science>40) grade_social_science = "D";
+		else grade_social_science = "F";
+
+		if (marks_individual.sec_lang>90) grade_sec_lang = "A+";
+		else if (marks_individual.sec_lang>80) grade_sec_lang = "A";
+		else if (marks_individual.sec_lang>70) grade_sec_lang = "B+";
+		else if (marks_individual.sec_lang>60) grade_sec_lang = "B";
+		else if (marks_individual.sec_lang>50) grade_sec_lang = "C";
+		else if (marks_individual.sec_lang>40) grade_sec_lang = "D";
+		else grade_sec_lang = "F";
+
+		printf("\nAbsolute Grades for %s - %lld are\n", temp->name, temp->roll_num);
+		printf("\n\tMaths:              %s", grade_english);
+		printf("\n\tEnglish:           %s", grade_math);
+		printf("\n\tScience:           %s", grade_science);
+		printf("\n\tSocial Science:    %s", grade_social_science);
+		printf("\n\tSecond Language:   %s", grade_sec_lang);
+		printf("\n");
+
+		temp = temp->next;
+	}	
+}
 void printRelativeGrading(Gradebook *gb_ptr)
 {
-	// print the relative grades of each student in the gradereport
+	char *grade_english;
+	char *grade_sec_lang;
+	char *grade_math;
+	char *grade_science;
+	char *grade_social_science;
+
+	Record *temp = gb_ptr->head;
+	double mean_marks[5] = {0};
+	int j = 0;
+	Marksheet marks = temp->marks;
+	while (temp != NULL)
+	{
+		j++;
+		mean_marks[0] += marks.english;
+		mean_marks[1] += marks.math;
+		mean_marks[2] += marks.science;
+		mean_marks[3] += marks.social_science;
+		mean_marks[4] += marks.sec_lang;
+		temp = temp->next;
+	}
+	if(j<=30)
+	{
+		printf("Relative grading is possible for class size greater than 30\n");
+		printf("Current class size =%d. Printing absolute grading\n",j);
+		printAbsGrade(gb_ptr	);
+		return;
+	}
+	for (int its = 0; its < 5; its++)
+	{
+		mean_marks[its] /= j;
+	}
+	temp = gb_ptr->head;
+	Marksheet marks1 = temp->marks;
+	double std_marks[5] = {0};
+	while (temp != NULL)
+	{
+		std_marks[0] += pow((marks1.english - mean_marks[0]), 2);
+		std_marks[1] += pow((marks1.math - mean_marks[1]), 2);
+		std_marks[2] += pow((marks1.science - mean_marks[2]), 2);
+		std_marks[3] += pow((marks1.social_science - mean_marks[3]), 2);
+		std_marks[4] += pow((marks1.sec_lang - mean_marks[4]), 2);
+		temp = temp->next;
+	}
+	for (int her = 0; her < 5; her++)
+	{
+		std_marks[her] = sqrt(std_marks[her] / j);
+	}
+	temp = gb_ptr->head;
+	Marksheet marks_individual;
+	while (temp != NULL)
+	{
+		marks_individual = temp->marks;
+		grade_english = generateRelativeGrade(marks_individual.english, mean_marks[0], std_marks[0]);
+		grade_math = generateRelativeGrade(marks_individual.math, mean_marks[1], std_marks[1]);
+		grade_science = generateRelativeGrade(marks_individual.science, mean_marks[2], std_marks[2]);
+		grade_social_science = generateRelativeGrade(marks_individual.social_science, mean_marks[3], std_marks[3]);
+		grade_sec_lang = generateRelativeGrade(marks_individual.sec_lang, mean_marks[4], std_marks[4]);
+
+		printf("\nRelative Grades for %s - %lld are\n", temp->name, temp->roll_num);
+		printf("\n\tMaths:              %s", grade_english);
+		printf("\n\tEnglish:           %s", grade_math);
+		printf("\n\tScience:           %s", grade_science);
+		printf("\n\tSocial Science:    %s", grade_social_science);
+		printf("\n\tSecond Language:   %s", grade_sec_lang);
+		printf("\n");
+
+		temp = temp->next;
+	}
 }
