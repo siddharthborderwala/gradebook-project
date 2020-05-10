@@ -48,9 +48,9 @@
 - yv140
 - Contributions
   - Created the core functions
-    - Relative Grading Algorithm and Duplication checking functions
+    - Relative Grading function,Duplication checking functions and integrity checks
   - Worked on README.md
-  - Debugging in Code Blocks
+  - Checking and debugging in Code Blocks
 
 ### Note
 
