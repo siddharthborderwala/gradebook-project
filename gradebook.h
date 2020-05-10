@@ -3,6 +3,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <stdbool.h>
+#include <math.h>
 
 // -> -> STRUCTURE DEFINITIONS
 
@@ -197,7 +198,12 @@ int countGradebookRecords(Gradebook *);
 /*
 print the grades and marksheet of each student in the gradereport 
 */
-void printGrades(Gradebook *);
+/*
+print the absolute grades of each student in the gradereport
+*/
+
+void printAbsGrade(Gradebook *);
+
 /*
 print the relative grades of each student in the gradereport
 */
