@@ -15,6 +15,7 @@ This project can be used as a library.
   * Sort the records in gradebook by roll number or name
   * Find the topper among the students whose records are entered
   * Count the number of records entered in the gradebook
+  * Find out the absolute grades of each student in various subjects
   * Find out the relative grades of each student in various subjects
 
 # To look at the Demo
