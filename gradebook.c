@@ -46,8 +46,6 @@ void addRecord(Gradebook *gb1)
 
 	scanf("%c", &ch); // temp statement to clear buffer
 	printf("\nEnter name: ");
-	//	fgets(name, 50, stdin);  // read name string
-	//	scanf("%c",&ch);
 	scanf("%[^\n]", name);
 	printf("\nEnter roll number:  ");
 	scanf("%lld", &roll_num);
@@ -165,7 +163,6 @@ Record findRecordByName(Gradebook *gb_ptr, char name[], bool should_print)
 		printf("Start Searching for %s\n", name);
 		printf("curr record name =   %s\n", cur->name);
 		printf("result of str cmp = %d\n", strcmp(cur->name, name));
-		//		printRecord(cur);
 		cur = cur->next;
 	}
 	if (cur == NULL)
@@ -287,7 +284,7 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 		while (cur != NULL && cur->roll_num != roll_num)
 			cur = cur->next;
 	}
-	else if (strcmp(name, "") != 0) // update using the roll number isStrEq(name, "")
+	else if (strcmp(name, "") != 0) 
 	{
 		// if length of the search name is greater than 50 characters, it will be truncated
 		if (strlen(name) > 50)
@@ -304,31 +301,7 @@ Record updateMarksheetInRecord(char name[], rollNum roll_num, Marksheet new_ms, 
 		printf("\nEnter valid information");
 		return;
 	}
-	/*
-	if (strcmp(name, "")) // update using the roll number isStrEq(name, "")
-	{
-		while (cur != NULL && cur->roll_num != roll_num)
-			cur = cur->next;
-	}
-	else if (roll_num == 0) // update using the name
-	{
-		// if length of the search name is greater than 50 characters, it will be truncated
-		if (strlen(name) > 50)
-		{
-			printf("\nLength of the search name cannot be greater than 50 characters, it will be truncated for the search");
-			name[50] = '\0';
-		}
-
-		while (cur != NULL && !strcmp(cur->name, name))//isStrEq
-			cur = cur->next;
-	}
-	else
-	{
-		printf("\nEnter valid information");
-		return;
-	}
-*/
-
+	
 	if (cur == NULL)
 	{
 		printf("\nUpdating Marksheet of %s, %lld - Record not found\n", name, roll_num);
@@ -373,35 +346,7 @@ void deleteRecord(char name[], rollNum roll_num, Gradebook *gb_ptr)
 		return;
 	}
 
-	/*	if (strcmp(name, ""))//isStrEq
-	{
-		while (cur != NULL && cur->roll_num != roll_num)
-		{
-			prev = cur;
-			cur = cur->next;
-		}
-	}
-	else if (roll_num == 0)
-	{
-		// if length of the search name is greater than 50 characters, it will be truncated
-		if (strlen(name) > 50)
-		{
-			printf("\nLength of the search name cannot be greater than 50 characters, it will be truncated for the search");
-			name[50] = '\0';
-		}
-
-		while (cur != NULL && strcmp(cur->name, name)!=0)//isStrEq
-		{
-			prev = cur;
-			cur = cur->next;
-		}
-	}
-	else if (strcmp(name, "") && roll_num == 0)//isStrEq
-	{
-		printf("\nEnter valid information to find the record to be deleted");
-		return;
-	}*/
-
+	
 	if (cur == NULL)
 	{
 		printf("\nWhile deleting given data name = %s, roll no = %lld  - Record not found\n", name, roll_num);
@@ -512,7 +457,6 @@ void sortGradebookName(Gradebook *gb_ptr, bool asc)
 					strcpy(j->name,k.name);
 				}
 				j=j->next;
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
 			}
 			i=i->next;
 		}
@@ -521,12 +465,9 @@ void sortGradebookName(Gradebook *gb_ptr, bool asc)
 		//sort the records in gradebook in descending order of roll num
 		while(i!=gb_ptr->tail)
 		{
-		//	printf("Inside i while roll num=%lld\n",i->roll_num);
 			j=i->next;
 			while(j!=NULL)
 			{
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
-			
 				if(strcmp(i->name,j->name)<0)
 				{
 					k.roll_num=i->roll_num;
@@ -540,7 +481,6 @@ void sortGradebookName(Gradebook *gb_ptr, bool asc)
 					strcpy(j->name,k.name);
 				}
 				j=j->next;
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
 			}
 			i=i->next;
 		}
@@ -556,15 +496,12 @@ void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
 	i=gb_ptr->head;
 	
 	if (asc == true)
-	{//	printf("Inside function\n");
+	{
 		while(i!=gb_ptr->tail)
-		{
-		//	printf("Inside i while roll num=%lld\n",i->roll_num);
+	
 			j=i->next;
 			while(j!=NULL)
 			{
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
-			
 				if(i->roll_num>j->roll_num)
 				{
 					k.roll_num=i->roll_num;
@@ -578,7 +515,6 @@ void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
 					strcpy(j->name,k.name);
 				}
 				j=j->next;
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
 			}
 			i=i->next;
 		}
@@ -587,12 +523,9 @@ void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
 		//sort the records in gradebook in descending order of roll num
 		while(i!=gb_ptr->tail)
 		{
-		//	printf("Inside i while roll num=%lld\n",i->roll_num);
 			j=i->next;
 			while(j!=NULL)
-			{
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
-			
+			{			
 				if(i->roll_num<j->roll_num)
 				{
 					k.roll_num=i->roll_num;
@@ -606,12 +539,10 @@ void sortGradebookRollNum(Gradebook *gb_ptr, bool asc)
 					strcpy(j->name,k.name);
 				}
 				j=j->next;
-			//	printf("Inside j while roll number=%lld\n",j->roll_num);
 			}
 			i=i->next;
 		}
 	}
-
 	printf("Gradebook is sorted by roll number\n");
 }
 
